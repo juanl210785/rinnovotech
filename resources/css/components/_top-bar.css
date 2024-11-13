@@ -1,0 +1,10 @@
+.top-bar {
+    /* Fija la altura de la barra superior */
+    height: 67px;
+    /* Asegura que la barra superior esté por encima de otros elementos */
+    z-index: 51;
+
+
+    /* Mejora: Usar Tailwind CSS para aplicar clases utilitarias */
+    @apply flex items-center relative border-b border-slate-200;
+}

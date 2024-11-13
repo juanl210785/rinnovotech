@@ -1,0 +1,15 @@
+.breadcrumb {
+    &.breadcrumb-light {
+        @apply h-full ml-10 pl-10 border-l border-white/[0.08];
+
+        .active {
+            @apply !text-white/70;
+            /* Mejora: Estilo para la clase activa */
+        }
+
+        @media (max-width: 768px) {
+            /* Ajuste: Uso de @media para media queries */
+            @apply ml-0 pl-0 border-l-0;
+        }
+    }
+}

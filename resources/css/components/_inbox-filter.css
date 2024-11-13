@@ -1,0 +1,10 @@
+.inbox-filter .inbox-filter__dropdown-menu {
+    width: 250px;
+    /* Mejora: Definición del ancho para el menú desplegable del filtro de la bandeja de entrada */
+}
+
+.inbox-filter__dropdown-menu .dropdown-content {
+    margin-left: -228px;
+    @apply w-auto;
+    /* Mejora: Aplicación de clases de utilidad para el contenido del desplegable */
+}

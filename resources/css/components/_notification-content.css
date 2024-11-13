@@ -1,0 +1,18 @@
+.notification-content {
+    width: 350px;
+
+    @media (max-width: 640px) {
+        /* Ajuste: Uso de @media para media queries */
+        width: 280px;
+    }
+
+    .notification-content__title {
+        @apply font-medium mb-5;
+        /* Mejora: Aplicación de clases de utilidad para el título del contenido de la notificación */
+    }
+
+    .notification-content__box {
+        @apply p-5;
+        /* Mejora: Aplicación de clases de utilidad para la caja del contenido de la notificación */
+    }
+}
