@@ -24,6 +24,12 @@
             'active' => request()->routeIs('admin.categories.*'),
             'route' => 'admin.categories.index',
         ],
+        [
+            'name' => __('Subcategories'),
+            'icon' => 'minus',
+            'active' => request()->routeIs('admin.subcategories.*'),
+            'route' => 'admin.subcategories.index',
+        ],
     ];
 @endphp
 <nav class="side-nav">
