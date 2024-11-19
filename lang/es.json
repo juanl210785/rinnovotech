@@ -1,4 +1,12 @@
 {
+    "Category": "Categoría",
+    "Family": "Familia",
+    "Active": "Activo",
+    "Inactive": "Inactivo",
+    "Subcategory": "Subcategoría",
+    "Status": "Estado",
+    "Add New Product": "Agregar producto",
+    "Products": "Productos",
     "Subcategories": "Subcategoría",
     "Category edited successfully": "Categoría editada con éxito",
     "Category created successfully": "Categoría creada correctamente",

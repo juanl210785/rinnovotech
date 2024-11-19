@@ -9,6 +9,9 @@ class Product extends Model
 {
     use HasFactory;
 
+    const ACTIVE = 'Activo';
+    const INACTIVE = 'Inactivo';
+
     protected $fillable = ['sku', 'name','description','image_path','price', 'subcategory_id'];
 
     public function subcategory(){

@@ -30,6 +30,12 @@
             'active' => request()->routeIs('admin.subcategories.*'),
             'route' => 'admin.subcategories.index',
         ],
+        [
+            'name' => __('Products'),
+            'icon' => 'shopping-bag',
+            'active' => request()->routeIs('admin.products.*'),
+            'route' => 'admin.products.index',
+        ],
     ];
 @endphp
 <nav class="side-nav">

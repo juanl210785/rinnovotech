@@ -41,7 +41,7 @@
     </div>
 
     @include('../layout/components/dark-mode-switcher')
-    @include('../layout/components/main-color-switcher')
+    {{-- @include('../layout/components/main-color-switcher') --}}
 
     <!-- BEGIN: JS Assets-->
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
