@@ -1,5 +1,13 @@
 {
+    "Active": "Activo",
+    "Inactive": "Inactivo",
+    "Subcategory": "Subcategoría",
+    "Category": "Categoría",
+    "Family": "Familia",
+    "Products": "Productos",
     "Subcategories": "Subcategoría",
+    "Stock": "Inventario",
+    "Status": "Estado",
     "Category edited successfully": "Categoría editada con éxito",
     "Category created successfully": "Categoría creada correctamente",
     "Success": "¡Éxito!",

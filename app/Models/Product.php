@@ -9,17 +9,23 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['sku', 'name','description','image_path','price', 'subcategory_id'];
+    const INACTIVE = "Inactivo";
+    const ACTIVE = "Activo";
 
-    public function subcategory(){
+    protected $fillable = ['sku', 'name', 'description', 'image_path', 'price', 'subcategory_id'];
+
+    public function subcategory()
+    {
         return $this->belongsTo(Subcategory::class);
     }
 
-    public function variants(){
+    public function variants()
+    {
         return $this->hasMany(Variant::class);
     }
 
-    public function options(){
+    public function options()
+    {
         return $this->belongsToMany(Option::class)->withPivot('value');
     }
 }
