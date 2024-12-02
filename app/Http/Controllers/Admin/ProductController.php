@@ -17,24 +17,20 @@ class ProductController extends Controller
         return view('admin.products.index', compact('products'));
     }
 
-
     public function create()
     {
         //
     }
-
 
     public function store(Request $request)
     {
         //
     }
 
-
     public function show(Product $product)
     {
         //
     }
-
 
     public function edit(Product $product)
     {
@@ -45,7 +41,6 @@ class ProductController extends Controller
     {
         //
     }
-
 
     public function destroy(Product $product)
     {
