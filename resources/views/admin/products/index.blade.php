@@ -48,18 +48,18 @@
             {{-- paginación --}}
             <div class="hidden md:block mx-auto text-slate-500">
                 @if ($products->hasPages())
-                    <div class="flex-1 text-left">
-                        <p class="text-sm text-gray-700 leading-5">
+                    <div class="hidden md:block mx-auto text-slate-500">
+                        <p>
                             {!! __('Showing') !!}
                             @if ($products->firstItem())
-                                <span class="font-medium">{{ $products->firstItem() }}</span>
+                                {{ $products->firstItem() }}
                                 {!! __('to') !!}
-                                <span class="font-medium">{{ $products->lastItem() }}</span>
+                                {{ $products->lastItem() }}
                             @else
                                 {{ $products->count() }}
                             @endif
                             {!! __('of') !!}
-                            <span class="font-medium">{{ $products->total() }}</span>
+                            {{ $products->total() }}
                             {!! __('results') !!}
                         </p>
                     </div>
