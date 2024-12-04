@@ -12,7 +12,7 @@
         <h2 class="text-lg font-medium mr-auto">
             {{ __('Products') }}
         </h2>
-        <x-link-button href="{{ route('admin.families.create') }}" class="flex items-center">
+        <x-link-button href="{{ route('admin.products.create') }}" class="flex items-center">
             <i data-lucide="plus"></i>
             <span class="ml-1">{{ __('Create') }}</span>
         </x-link-button>
