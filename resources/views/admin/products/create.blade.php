@@ -39,7 +39,9 @@
     </div>
 
     @push('js')
-        @vite('resources/js/ckeditor-classic.js')
+        <script src="resources/js/ckeditor-classic.js"></script>
     @endpush
+
+
 
 </x-app-layout>

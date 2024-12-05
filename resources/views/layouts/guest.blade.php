@@ -31,7 +31,7 @@
                 <a href="" class="-intro-x flex items-center pt-5">
                     <img alt="Icewall Tailwind HTML Admin Template" class="w-6" src="{{ asset('img/tienda.png') }}">
                     <span class="text-white text-lg ml-3">
-                        Tinker
+                        {{ config('app.name', 'Laravel') }}
                     </span>
                 </a>
                 <div class="my-auto">

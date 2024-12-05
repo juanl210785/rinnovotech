@@ -10,11 +10,8 @@ use Livewire\Component;
 class ProductsCreate extends Component
 {
     public $families;
-
     public $family_id = '';
-
     public $category_id = '';
-
     public $product = [
         'sku' => '',
         'name' => '',
@@ -34,11 +31,13 @@ class ProductsCreate extends Component
     public function updatedFamilyId()
     {
         $this->category_id = '';
+        $this->dispatchBrowserEvent('reinitialize-selects');
     }
 
     public function updatedCategoryId()
     {
         $this->product['subcategory_id'] = '';
+        $this->dispatchBrowserEvent('reinitialize-selects');
     }
 
     public function getCategoriesProperty()
