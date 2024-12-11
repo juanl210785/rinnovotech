@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('image_path');
             $table->float('price');
             $table->string('status')->default(Product::ACTIVE);
+            $table->string('condition')->nullable();
+            $table->integer('stock');
             $table->foreignId('subcategory_id')->constrained();
             $table->timestamps();
         });

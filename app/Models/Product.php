@@ -11,8 +11,10 @@ class Product extends Model
 
     const ACTIVE = 'Activo';
     const INACTIVE = 'Inactivo';
+    const NEW = 'Nuevo';
+    const USED = 'Usado';
 
-    protected $fillable = ['sku', 'name', 'description', 'image_path', 'price', 'subcategory_id'];
+    protected $fillable = ['sku', 'name', 'description', 'image_path', 'price', 'status', 'condition', 'stock', 'subcategory_id'];
 
     public function subcategory()
     {

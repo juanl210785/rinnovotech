@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ProductFactory extends Factory
 {
-    
+
     public function definition()
     {
         return [
@@ -20,6 +20,8 @@ class ProductFactory extends Factory
             'image_path' => fake()->imageUrl(),
             'price' => fake()->randomFloat(2, 20, 300),
             'status' => fake()->randomElement([Product::ACTIVE, Product::INACTIVE]),
+            'condition' => fake()->randomElement([Product::NEW, Product::USED]),
+            'stock' => fake()->numberBetween(1, 200),
             'subcategory_id' => fake()->numberBetween(1, 632),
         ];
     }
