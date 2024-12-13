@@ -107,7 +107,7 @@
                                 <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">
                                     {{ $product->subcategory->name }}</div>
                             </td>
-                            <td class="text-center"></td>
+                            <td class="text-center">{{$product->stock}} Unid.</td>
                             <td class="text-center">${{ $product->price }}</td>
                             <td class="w-40">
                                 @if ($product->status == 'Activo')
