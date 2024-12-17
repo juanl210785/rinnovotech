@@ -85,7 +85,16 @@ class ProductsCreate extends Component
             'product.subcategory_id' => 'Subcategoría',
         ]);
 
-        dd($this->product);
+        session()->flash('notification', [
+            'clase' => 'text-dander',
+            'lucide' => 'x-circle',
+            'title' => 'Error',
+            'message' => '¡Producto no ha sido creado!'
+        ]);
+
+        return redirect()->route('admin.products.create');
+
+        //dd($this->product);
         /* if ($this->image) {
             $extension = $this->image->getClientOriginalExtension();
             $mimeType = $this->image->getClientMimeType();
@@ -241,6 +250,6 @@ class ProductsCreate extends Component
 
     public function render()
     {
-        return view('livewire.admin.products.products-create');
+        return view('livewire.admin.products.products-create')->with('flashMessage', session('message'));
     }
 }

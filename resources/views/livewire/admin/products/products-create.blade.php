@@ -5,9 +5,9 @@
     <form wire:submit.prevent='save' enctype="multipart/form-data">
         <!-- BEGIN: Uplaod Product - Imagen -->
         <div class="intro-y box p-5">
-            @if (session()->has('message'))
+           {{--  @if (session()->has('message'))
                 <x-input-error :messages="[session('message')]" class="mt-2" />
-            @endif
+            @endif --}}
             <div class="border border-slate-200/60 rounded-md p-5">
                 <div class="font-medium text-base flex items-center border-b border-slate-200/60 pb-5">
                     <i data-lucide="chevron-down" class="w-4 h-4 mr-2"></i> {{ __('Add Image') }}
@@ -431,4 +431,13 @@
             <button type="submit" class="btn py-3 btn-primary w-full md:w-52">{{ __('Save') }}</button>
         </div>
     </form>
+
+    <!-- BEGIN: Notification Content -->
+    
+    <!-- END: Notification Content -->
+
+
+    
+
+
 </div>

@@ -12,6 +12,17 @@
     ],
 ]">
 
+    @if (session('notification'))
+        <x-notification clase="{{ session('notification.clase') }}" lucide="{{ session('notification.lucide') }}">
+            <x-slot name="title">
+                {{ session('notification.title') }}
+            </x-slot>
+            {{ session('notification.message') }}
+        </x-notification>
+    @endif
+
+    {{-- 
+ --}}
     <div class="intro-y flex items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">{{ __('Add Product') }}</h2>
     </div>
@@ -40,6 +51,26 @@
 
     @push('js')
         <script src="resources/js/ckeditor-classic.js"></script>
+
+
+        {{-- <script>
+            document.addEventListener('DOMContentLoaded',
+                function() {
+                    // Clonar y actualizar el contenido de la notificación 
+                    var notificationContent = document.querySelector("#success-notification-content").cloneNode(true);
+                    notificationContent.classList.remove("hidden");
+
+                    // Mostrar la notificación 
+                    Toastify({
+                        node: notificationContent,
+                        duration: 5000,
+                        close: true,
+                        gravity: "top", // `top` or `bottom` 
+                        position: "right", // `left`, `center` or `right` 
+                        stopOnFocus: true, // Previene el cierre al hacer hover 
+                    }).showToast();
+                });
+        </script> --}}
     @endpush
 
 
