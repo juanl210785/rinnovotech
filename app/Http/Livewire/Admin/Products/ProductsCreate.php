@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Products;
 
 use App\Models\Category;
 use App\Models\Family;
+use App\Models\Product;
 use App\Models\Subcategory;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -61,11 +62,12 @@ class ProductsCreate extends Component
 
     public function save()
     {
+        $this->product['status'] = $this->product['status'] ? 'Activo' : 'Inactivo';
         $this->validate([
             'image' => 'required|image|max:10240',
             'product.sku' => 'required|unique:products,sku',
             'product.name' => 'required|unique:products,name',
-            'product.description' => 'required|max:2000',
+            'product.description' => 'nullable|max:2000',
             'product.price' => 'required|numeric|min:0|max:9999999.99|regex:/^\d+(\.\d{1,2})?$/',
             'product.status' => 'required',
             'product.condition' => 'required',
