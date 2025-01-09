@@ -8,7 +8,7 @@
         'route' => route('admin.products.index'),
     ],
     [
-        'name' => __('New'),
+        'name' => $product->name,
     ],
 ]">
 
@@ -21,10 +21,8 @@
         </x-notification>
     @endif
 
-    {{-- 
- --}}
     <div class="intro-y flex items-center mt-8">
-        <h2 class="text-lg font-medium mr-auto">{{ __('Add Product') }}</h2>
+        <h2 class="text-lg font-medium mr-auto">{{ __('Edit Product') }}</h2>
     </div>
     <div class="grid grid-cols-11 gap-x-6 mt-5 pb-20">
         <!-- BEGIN: Notification -->
@@ -41,38 +39,12 @@
 
         <div class="intro-y col-span-11 2xl:col-span-9">
 
-            @livewire('admin.products.products-create')
+            @livewire('admin.products.products-edit', ['product' => $product])
 
             {{-- Aqui va la parte 1 --}}
         </div>
 
         {{-- Aqui va parte 2 --}}
     </div>
-
-    @push('js')
-        <script src="resources/js/ckeditor-classic.js"></script>
-
-
-        {{-- <script>
-            document.addEventListener('DOMContentLoaded',
-                function() {
-                    // Clonar y actualizar el contenido de la notificación 
-                    var notificationContent = document.querySelector("#success-notification-content").cloneNode(true);
-                    notificationContent.classList.remove("hidden");
-
-                    // Mostrar la notificación 
-                    Toastify({
-                        node: notificationContent,
-                        duration: 5000,
-                        close: true,
-                        gravity: "top", // `top` or `bottom` 
-                        position: "right", // `left`, `center` or `right` 
-                        stopOnFocus: true, // Previene el cierre al hacer hover 
-                    }).showToast();
-                });
-        </script> --}}
-    @endpush
-
-
 
 </x-app-layout>
