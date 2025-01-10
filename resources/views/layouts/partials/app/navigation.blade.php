@@ -3,20 +3,24 @@
 
     <!-- BEGIN: Breadcrumb -->
     @include('layouts.partials.app.breadcrumb')
-    
+
     <!-- END: Breadcrumb -->
 
     <!-- BEGIN: Search -->
     <div class="intro-x relative mr-3 sm:mr-6">
+
         <div class="search hidden sm:block">
             <input type="text" class="search__input form-control border-transparent" placeholder="Search...">
             <i data-lucide="search" class="search__icon"></i>
         </div>
+
         <a class="notification sm:hidden" href="">
             <i data-lucide="search" class="notification__icon"></i>
         </a>
+
         <div class="search-result">
             <div class="search-result__content">
+
                 <div class="search-result__content__title">Pages</div>
                 <div class="mb-5">
                     <a href="" class="flex items-center">
@@ -39,6 +43,7 @@
                         <div class="ml-3">Transactions Report</div>
                     </a>
                 </div>
+
                 <div class="search-result__content__title">Users</div>
                 <div class="mb-5">
                     @foreach (array_slice($fakers, 0, 4) as $faker)
@@ -53,6 +58,7 @@
                         </a>
                     @endforeach
                 </div>
+
                 <div class="search-result__content__title">Products</div>
                 @foreach (array_slice($fakers, 0, 4) as $faker)
                     <a href="" class="flex items-center mt-2">
@@ -65,6 +71,7 @@
                             {{ $faker['products'][0]['category'] }}</div>
                     </a>
                 @endforeach
+
             </div>
         </div>
     </div>

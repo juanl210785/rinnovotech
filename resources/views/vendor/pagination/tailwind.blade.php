@@ -1,4 +1,81 @@
 @if ($paginator->hasPages())
+    <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
+        <nav class="w-full sm:w-auto sm:mr-auto">
+            <ul class="pagination">
+                {{-- <li class="page-item">
+                        <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevrons-left"></i>
+                        </a>
+                    </li> --}}
+                @if ($paginator->onFirstPage())
+                    <li class="page-item">
+                        <button disabled class="page-link"> <i class="w-4 h-4" data-lucide="chevron-left"></i>
+                        </button>
+                    </li>
+                @else
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $paginator->previousPageUrl() }}"> <i class="w-4 h-4"
+                                data-lucide="chevron-left"></i>
+                        </a>
+                    </li>
+                @endif
+
+                {{-- Pagination Elements --}}
+                @foreach ($paginator->links()->elements as $element)
+                    {{-- "Three Dots" Separator --}}
+                    @if (is_string($element))
+                        <li class="page-item active"> <button class="page-link">{{ $element }}</button>
+                        </li>
+                    @endif
+
+                    {{-- Array Of Links --}}
+                    @if (is_array($element))
+                        @foreach ($element as $page => $url)
+                            @if ($page == $paginator->currentPage())
+                                <li class="page-item active"> <button class="page-link">{{ $page }}</button>
+                                </li>
+                            @else
+                                <li class="page-item"> <a class="page-link" href="{{ $url }}"
+                                        aria-label="{{ __('Go to page :page', ['page' => $page]) }}">{{ $page }}</a>
+                                </li>
+                            @endif
+                        @endforeach
+                    @endif
+                @endforeach
+
+                @if ($paginator->hasMorePages())
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $paginator->nextPageUrl() }}"> <i class="w-4 h-4"
+                                data-lucide="chevron-right"></i>
+                        </a>
+                    </li>
+                @else
+                    <li class="page-item">
+                        <button disabled class="page-link"> <i class="w-4 h-4" data-lucide="chevron-right"></i>
+                        </button>
+                    </li>
+                @endif
+            </ul>
+        </nav>
+        <form method="GET" action="{{ route('admin.products.index') }}">
+            <select class="w-20 form-select box mt-3 sm:mt-0" name="pag" onchange="this.form.submit()">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="35">35</option>
+                <option value="50">50</option>
+            </select>
+        </form>
+        {{-- <select class="w-20 form-select box mt-3 sm:mt-0" name="pag">
+                    <option value="10">10</option>
+                    <option value="10">25</option>
+                    <option value="10">35</option>
+                    <option value="10">50</option>
+                </select> --}}
+    </div>
+@endif
+
+
+
+{{-- @if ($paginator->hasPages())
     <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="flex items-center justify-between">
         <div class="flex justify-between flex-1 sm:hidden">
             @if ($paginator->onFirstPage())
@@ -46,7 +123,7 @@
 
             <div class="flex-1 text-right">
                 <span class="relative z-0 inline-flex shadow-sm rounded-md">
-                    {{-- Previous Page Link --}}
+                    
                     @if ($paginator->onFirstPage())
                         <span aria-disabled="true" aria-label="{{ __('pagination.previous') }}">
                             <span
@@ -71,9 +148,9 @@
                         </a>
                     @endif
 
-                    {{-- Pagination Elements --}}
+                    
                     @foreach ($elements as $element)
-                        {{-- "Three Dots" Separator --}}
+                        
                         @if (is_string($element))
                             <span aria-disabled="true">
                                 <span
@@ -81,7 +158,7 @@
                             </span>
                         @endif
 
-                        {{-- Array Of Links --}}
+                        
                         @if (is_array($element))
                             @foreach ($element as $page => $url)
                                 @if ($page == $paginator->currentPage())
@@ -100,7 +177,7 @@
                         @endif
                     @endforeach
 
-                    {{-- Next Page Link --}}
+                    
                     @if ($paginator->hasMorePages())
                         <a href="{{ $paginator->nextPageUrl() }}" rel="next"
                             class="relative inline-flex items-center px-2 py-2 -ml-px text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md leading-5 hover:text-gray-400 focus:z-10 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
@@ -129,4 +206,4 @@
         </div>
 
     </nav>
-@endif
+@endif --}}
