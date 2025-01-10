@@ -88,10 +88,10 @@ class ProductsCreate extends Component
         ]);
 
         session()->flash('notification', [
-            'clase' => 'text-dander',
-            'lucide' => 'x-circle',
-            'title' => 'Error',
-            'message' => '¡Producto no ha sido creado!'
+            'clase' => 'text-success',
+            'lucide' => 'check-circle',
+            'title' => 'Exito',
+            'message' => '¡Producto ha sido creado!'
         ]);
 
         return redirect()->route('admin.products.create');
@@ -252,6 +252,6 @@ class ProductsCreate extends Component
 
     public function render()
     {
-        return view('livewire.admin.products.products-create')->with('flashMessage', session('message'));
+        return view('livewire.admin.products.products-create');
     }
 }
