@@ -8,6 +8,15 @@
     ],
 ]">
 
+    @if (session('notification'))
+        <x-notification clase="{{ session('notification.clase') }}" lucide="{{ session('notification.lucide') }}">
+            <x-slot name="title">
+                {{ session('notification.title') }}
+            </x-slot>
+            {{ session('notification.message') }}
+        </x-notification>
+    @endif
+
     <div class="intro-y flex items-center justify-between mt-8 mb-8">
         <h2 class="text-lg font-medium mr-auto">
             {{ __('Products') }}
@@ -101,15 +110,13 @@
                             <td class="text-center">{{ $product->stock }} Unid.</td>
                             <td class="text-center">${{ $product->price }}</td>
                             <td class="w-40">
-                                @if ($product->status == 'Activo')
-                                    <div class="flex items-center justify-center text-success"> <i
-                                            data-lucide="check-square" class="w-4 h-4 mr-2"></i> {{ __('Active') }}
-                                    </div>
-                                @else
-                                    <div class="flex items-center justify-center text-danger"> <i
-                                            data-lucide="check-square" class="w-4 h-4 mr-2"></i> {{ __('Inactive') }}
-                                    </div>
-                                @endif
+                                <div
+                                    class="flex items-center justify-center {{ $product->status == 'Activo' ? 'text-success' : 'text-danger' }} ">
+                                    <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> <a
+                                        href="{{ route('admin.products.status', $product) }}">
+                                        {{ $product->status }}
+                                    </a>
+                                </div>
                             </td>
                             <td class="text-center">{{ $product->subcategory->category->name }}</td>
                             <td class="text-center">{{ $product->subcategory->category->family->name }}</td>
@@ -119,9 +126,17 @@
                                         href="{{ route('admin.products.edit', $product) }}"> <i
                                             data-lucide="check-square" class="w-4 h-4 mr-1"></i> {{ __('Edit') }}
                                     </a>
-                                    <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal"
-                                        data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2"
-                                            class="w-4 h-4 mr-1"></i> {{ __('Delete') }} </a>
+
+                                    <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-modal-preview"
+                                        class="flex items-center text-danger">
+                                        <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> {{ __('Delete') }}
+                                    </a>
+
+                                    <form action="{{ route('admin.products.destroy', $product) }}" method="post"
+                                        id="form-delete">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -135,4 +150,22 @@
         {{ $products->links() }}
         <!-- END: Pagination -->
     </div>
+
+    <!-- BEGIN: Modal Content -->
+    <x-modal-delete>
+        <x-slot name="action">
+            <button type="button" class="btn btn-danger w-24" onclick="confirmDelete()">
+                {{ __('Delete') }}
+            </button>
+        </x-slot>
+    </x-modal-delete>
+    <!-- END: Modal Content -->
+
+    @push('js')
+        <script>
+            function confirmDelete() {
+                document.getElementById('form-delete').submit();
+            }
+        </script>
+    @endpush
 </x-app-layout>
