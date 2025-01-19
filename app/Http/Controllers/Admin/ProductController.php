@@ -44,6 +44,38 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        //
+        //return $product;
+        $product->delete();
+
+        session()->flash('notification', [
+            'clase' => 'text-success',
+            'lucide' => 'check-circle',
+            'title' => 'Éxito',
+            'message' => '¡Producto ha sido eliminado!'
+        ]);
+
+        return redirect()->route('admin.products.index');
+    }
+
+    public function changeStatus(Product $product)
+    {
+        if ($product->status == Product::ACTIVE) {
+            $product->update([
+                'status' => Product::INACTIVE
+            ]);
+        } else {
+            $product->update([
+                'status' => Product::ACTIVE
+            ]);
+        }
+
+        session()->flash('notification', [
+            'clase' => 'text-success',
+            'lucide' => 'check-circle',
+            'title' => 'Éxito',
+            'message' => '¡Estado ha sido actualizado!'
+        ]);
+
+        return redirect()->route('admin.products.index');
     }
 }

@@ -19,3 +19,5 @@ Route::resource('families', FamilyController::class);
 Route::resource('categories', CategoryController::class);
 Route::resource('subcategories', SubcategoryController::class);
 Route::resource('products', ProductController::class);
+
+Route::get('/products/status/{product}', [ProductController::class, 'changeStatus'])->name('products.status');

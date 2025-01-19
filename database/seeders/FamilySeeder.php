@@ -10,11 +10,7 @@ use Illuminate\Database\Seeder;
 
 class FamilySeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+
     public function run()
     {
         $families = [
@@ -325,19 +321,19 @@ class FamilySeeder extends Seeder
                     'Cuidado del adulto',
                     'Protección del adulto',
                 ],
-    
+
                 'Cuidado y protección femenina' => [
                     'Cuidado femenino',
                     'Protección femenina',
                 ],
-    
+
                 'Packs de salud y bienestar' => [
                     'Cuidado del adulto',
                     'Cuidado femenino',
                     'Protección del adulto',
                     'Protección femenina',
                 ],
-    
+
                 'Desayuno' => [
                     'Café',
                     'Cereales',
@@ -347,12 +343,12 @@ class FamilySeeder extends Seeder
                     'Pan',
                     'Té',
                 ],
-    
+
                 'Embutidos y fiambres' => [
                     'Embutidos',
                     'Fiambres',
                 ],
-    
+
                 'Cuidado personal' => [
                     'Afeitado',
                     'Cuidado bucal',
@@ -825,7 +821,7 @@ class FamilySeeder extends Seeder
                     'Sillas',
                     'Sofás',
                 ],
-            
+
             ],
             'Librería' => [
                 'Libros' => [

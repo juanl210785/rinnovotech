@@ -5,9 +5,6 @@
     <form wire:submit.prevent='save' enctype="multipart/form-data">
         <!-- BEGIN: Uplaod Product - Imagen -->
         <div class="intro-y box p-5">
-            {{--  @if (session()->has('message'))
-                <x-input-error :messages="[session('message')]" class="mt-2" />
-            @endif --}}
             <div class="border border-slate-200/60 rounded-md p-5">
                 <div class="font-medium text-base flex items-center border-b border-slate-200/60 pb-5">
                     <i data-lucide="chevron-down" class="w-4 h-4 mr-2"></i> {{ __('Add Image') }}
@@ -46,7 +43,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="w-full mt-3 xl:mt-0 border-2 border-dashed rounded-md p-4">
 
                             <figure class="relative" style="height: 20rem;">
@@ -70,12 +67,12 @@
                             @else
                                 <x-input-error :messages="$errors->get('image')" class="mt-2" />
                             @endif
-                            
+
 
 
                         </div>
 
-                        
+
 
                     </div>
                 </div>
@@ -204,8 +201,8 @@
                             </div>
                         </div>
                         <div class="w-full mt-3 xl:mt-0 flex-1">
-                            <select wire:model.live='productEdit.subcategory_id' key="{{ now() }}-subcategory"
-                                class="form-select mt-2 sm:mr-2">
+                            <select wire:model.live='productEdit.subcategory_id'
+                                key="{{ now() }}-subcategory" class="form-select mt-2 sm:mr-2">
                                 <option value="" disabled>Seleccione una subcategoría</option>
                                 @foreach ($this->subcategories as $subcategory)
                                     <option value="{{ $subcategory->id }}" @selected(old('productEdit.subcategory_id') == $subcategory->id)>
@@ -355,13 +352,4 @@
             <button type="submit" class="btn py-3 btn-primary w-full md:w-52">{{ __('Update') }}</button>
         </div>
     </form>
-
-    <!-- BEGIN: Notification Content -->
-
-    <!-- END: Notification Content -->
-
-
-
-
-
 </div>
