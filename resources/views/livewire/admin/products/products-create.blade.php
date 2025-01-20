@@ -5,9 +5,6 @@
     <form wire:submit.prevent='save' enctype="multipart/form-data">
         <!-- BEGIN: Uplaod Product - Imagen -->
         <div class="intro-y box p-5">
-           {{--  @if (session()->has('message'))
-                <x-input-error :messages="[session('message')]" class="mt-2" />
-            @endif --}}
             <div class="border border-slate-200/60 rounded-md p-5">
                 <div class="font-medium text-base flex items-center border-b border-slate-200/60 pb-5">
                     <i data-lucide="chevron-down" class="w-4 h-4 mr-2"></i> {{ __('Add Image') }}
@@ -46,41 +43,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- {{ asset('img/no_product.png') }} --}}
-                        {{-- {{ asset('build/assets/images/' . $fakers[0]['photos'][0]) }} --}}
-                        {{-- <div
-                            class="w-full mt-3 xl:mt-0 border-2 border-dashed shadow-sm border-slate-200/60 rounded-md pt-4">
-                            <div class="relative image-fit cursor-pointer zoom-in mx-auto" style="height: 10rem;">
-                                <img class="rounded-md w-full h-full object-cover" alt="Midone - HTML Admin Template"
-                                    src="{{ asset('img/no_product.png') }}">
-                                <div title="Remove this profile photo?"
-                                    class="tooltip w-5 h-5 flex items-center justify-center absolute rounded-full text-white bg-danger right-0 top-0 -mr-2 -mt-2">
-                                    <i data-lucide="x" class="w-4 h-4"></i>
-                                </div>
-                            </div>
-                            <div class="mx-auto cursor-pointer relative mt-5">
-                                <button type="button" class="btn btn-primary w-full">Change Photo1</button>
-                                <input type="file" class="w-full h-full top-0 left-0 absolute opacity-0">
-                            </div>
-                        </div> --}}
-
-                        {{-- <div
-                            class="w-full mt-3 xl:mt-0 border-2 border-dashed shadow-sm border-slate-200/60 rounded-md pt-4">
-                            <div class="h-40 relative image-fit cursor-pointer zoom-in mx-auto">
-                                    <img class="rounded-md" alt="Midone - HTML Admin Template"
-                                        src="{{ asset('build/assets/images/' . $fakers[0]['photos'][0]) }}">
-                                    <div title="Remove this profile photo?"
-                                        class="tooltip w-5 h-5 flex items-center justify-center absolute rounded-full text-white bg-danger right-0 top-0 -mr-2 -mt-2">
-                                        <i data-lucide="x" class="w-4 h-4"></i>
-                                    </div>
-                                </div>
-                                <div class="mx-auto cursor-pointer relative mt-5">
-                                    <button type="button" class="btn btn-primary w-full">Change Photo1</button>
-                                    <input type="file" class="w-full h-full top-0 left-0 absolute opacity-0">
-                                </div>
-                        </div> --}}
-
-                        {{-- {{ asset('products/' . $numberRandom . '.jpg') }} --}}
+                        
                         <div class="w-full mt-3 xl:mt-0 border-2 border-dashed rounded-md p-4">
 
                             <figure class="relative" style="height: 20rem;">
@@ -104,55 +67,8 @@
                             @else
                                 <x-input-error :messages="$errors->get('image')" class="mt-2" />
                             @endif
-                            {{-- <x-input-error :messages="$errors->get('image')" class="mt-2" /> --}}
-
-                            {{--  <figure class="">
-                                <img class="object-cover object-center w-full"
-                                    src="{{ asset('build/assets/images/' . $fakers[0]['photos'][0]) }}" alt="">
-                            </figure> --}}
-                            {{-- <div class="grid grid-cols-10 gap-5 pl-4 pr-5">
-                                <div class="col-span-5 md:col-span-2 h-28 relative image-fit cursor-pointer zoom-in">
-                                    <img class="rounded-md" alt="Midone - HTML Admin Template"
-                                        src="{{ asset('img/no_product.png') }}">
-                                    <div title="Remove this image?"
-                                        class="tooltip w-5 h-5 flex items-center justify-center absolute rounded-full text-white bg-danger right-0 top-0 -mr-2 -mt-2">
-                                        <i data-lucide="x" class="w-4 h-4"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="px-4 pb-4 mt-5 flex items-center justify-center cursor-pointer relative">
-                                <i data-lucide="image" class="w-4 h-4 mr-2"></i> <span class="text-primary mr-1">Upload
-                                    a
-                                    file</span> or drag and drop
-                                <input id="horizontal-form-1" type="file"
-                                    class="w-full h-full top-0 left-0 absolute opacity-0">
-                            </div> --}}
-
 
                         </div>
-
-                        {{-- <div class="w-full mt-3 xl:mt-0 flex-1 border-2 border-dashed rounded-md pt-4">
-                            <div class="grid grid-cols-10 gap-5 pl-4 pr-5">
-                                <div class="col-span-5 md:col-span-2 h-28 relative image-fit cursor-pointer zoom-in">
-                                    <img class="rounded-md" alt="Midone - HTML Admin Template"
-                                        src="{{ asset('img/no_product.png') }}">
-                                    <div title="Remove this image?"
-                                        class="tooltip w-5 h-5 flex items-center justify-center absolute rounded-full text-white bg-danger right-0 top-0 -mr-2 -mt-2">
-                                        <i data-lucide="x" class="w-4 h-4"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="px-4 pb-4 mt-5 flex items-center justify-center cursor-pointer relative">
-                                <i data-lucide="image" class="w-4 h-4 mr-2"></i> <span class="text-primary mr-1">Upload
-                                    a
-                                    file</span> or drag and drop
-                                <input id="horizontal-form-1" type="file"
-                                    class="w-full h-full top-0 left-0 absolute opacity-0">
-                            </div>
-                            <x-input-error :messages="$errors->get('product.image_path')" class="mt-2" />
-                        </div> --}}
-
                     </div>
                 </div>
             </div>

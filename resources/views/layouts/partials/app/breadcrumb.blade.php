@@ -9,8 +9,6 @@
                         {{$breadcrumb['name']}}
                     @endisset</li>
             @endforeach
-
-            {{-- <li class="breadcrumb-item active" aria-current="page">Dashboard</li> --}}
         </ol>
     </nav>
 @endif
