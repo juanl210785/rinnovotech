@@ -9,10 +9,27 @@ class ManageOptions extends Component
 {
 
     public $options;
+    public $openModal = true;
+    public $newOption = [
+        'name' => '',
+        'type' => 1,
+        'features' => [
+            [
+                'value' => '',
+                'description' => ''
+            ]
+        ]
+    ];
 
-    public function mount(){
+    public function mount()
+    {
         $this->options = Option::with('features')->get();
     }
+
+    public function addFeatures() : Returntype {
+        
+    }
+
     public function render()
     {
         return view('livewire.admin.options.manage-options');

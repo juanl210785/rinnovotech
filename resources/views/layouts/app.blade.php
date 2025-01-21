@@ -25,6 +25,9 @@
 
     {{-- Styles --}}
     @livewireStyles
+
+    {{-- Vue.js --}}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
 </head>
 
 <body class="py-5 md:py-0 bg-black/[0.15]">

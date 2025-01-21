@@ -8,12 +8,28 @@
     ],
 ]">
 
-<div class="intro-y flex items-center justify-between mt-8 mb-8">
-    <h2 class="text-lg font-medium mr-auto">
-        {{ __('Options') }}
-    </h2>
-</div>
+    <div class="intro-y flex items-center justify-between mt-8 mb-8">
+        <h2 class="text-lg font-medium mr-auto">
+            {{ __('Options') }}
+        </h2>
 
-@livewire('admin.options.manage-options')
+        <!-- BEGIN: Modal Toggle -->
+        <div class="text-center">
+            <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#header-footer-modal-preview"
+                class="btn btn-primary"><i data-lucide="plus" class="mr-1"></i>{{ __('Create') }}</a>
+        </div>
+        <!-- END: Modal Toggle -->
+    </div>
 
+    <div id="app">
+        @livewire('admin.options.manage-options')
+    </div>
+
+    @push('js')
+        <script>
+            new Vue({
+                el: '#app',
+            });
+        </script>
+    @endpush
 </x-app-layout>

@@ -48,12 +48,12 @@
     <a href="" class="intro-x flex items-center pl-5 pt-4 mt-3">
         <img alt="Midone - HTML Admin Template" class="w-6" src="{{ asset('img/tienda.png') }}">
         <span class="hidden xl:block text-white text-lg ml-3">
-            Tinker
+            {{ config('app.name', 'Eccomerce') }}
         </span>
     </a>
     <div class="side-nav__devider my-6"></div>
     <ul>
-        
+
         @foreach ($links as $link)
             <li>
                 <a href="{{ route($link['route']) }}" class="side-menu {{ $link['active'] ? 'side-menu--active' : '' }} ">
@@ -62,6 +62,6 @@
                 </a>
             </li>
         @endforeach
-        
+
     </ul>
 </nav>
