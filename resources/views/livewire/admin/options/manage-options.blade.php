@@ -1,4 +1,19 @@
-<div>
+<div> {{-- class="intro-y flex items-center justify-between mt-8 mb-8" --}}
+
+    <div class="intro-y flex items-center justify-between mt-8 mb-8">
+        <h2 class="text-lg font-medium mr-auto">
+            {{ __('Options') }}
+        </h2>
+
+        <!-- BEGIN: Modal Toggle -->
+        <div class="text-center">
+            <button class="btn btn-primary" wire:click="$set('openModal', true)"><i data-lucide="plus"
+                    class="mr-1"></i>{{ __('Create') }}</button>
+        </div>
+        <!-- END: Modal Toggle -->
+    </div>
+
+
     <div class="intro-y box p-5 space-y-6">
         @foreach ($options as $option)
             <div class="p-6 rounded-md border border-slate-200/60 relative" wire:key="option-{{ $option->id }}">
@@ -72,72 +87,19 @@
                 </div>
             </div>
 
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between my-4">
                 {{-- <hr class="flex-1 "> --}}
 
-                <span class=""> {{ __('Values') }}</span>
-                <button type="button" class="btn btn-secondary w-20"
+                <span class="font-semibold"> {{ __('Values') }}</span>
+                <button type="button" class="btn btn-secondary w-20 font-semibold"
                     wire:click='addFeature'>{{ __('Add') }}</button>
 
                 {{-- <hr class="flex-1"> --}}
             </div>
 
-            @foreach ($newOption['features'] as $index => $feature)
-                <div class="grid grid-cols-12 gap-4 gap-y-3" wire:key='features-{{ $index }}'>
-                    <div class="col-span-12 sm:col-span-6">
-                        <label for="modal-form-{{ $index }}-value"
-                            class="form-label">{{ __('Value') }}</label>
-                        <input id="modal-form-{{ $index }}-value" type="text" class="form-control"
-                            wire:model='newOption.features.{{ $index }}.value'>
-                    </div>
-                    <div class="col-span-12 sm:col-span-6">
-                        <label for="modal-form-{{ $index }}-description"
-                            class="form-label">{{ __('Description') }}</label>
-                        <input id="modal-form-{{ $index }}-description" type="text" class="form-control"
-                            wire:model='newOption.features.{{ $index }}.description'>
-                    </div>
-                </div>
-            @endforeach
-        </x-slot>
-        <x-slot name="footer"></x-slot>
-    </x-dialog-modal>
-    <div id="header-footer-modal-preview" class="modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- BEGIN: Modal Header -->
-                <div class="modal-header">
-                    <h2 class="font-medium text-base mr-auto">{{ __('Create new option') }}</h2>
-
-                </div>
-                <!-- END: Modal Header -->
-
-                <!-- BEGIN: Modal Body -->
-                <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
-                    <div class="col-span-12 sm:col-span-6">
-                        <label for="modal-form-1" class="form-label">{{ __('Name') }}</label>
-                        <input id="modal-form-1" type="text" class="form-control" wire:model='newOption.name'>
-                    </div>
-                    <div class="col-span-12 sm:col-span-6">
-                        <label for="modal-form-6" class="form-label">{{ __('Type') }}</label>
-                        <select id="modal-form-6" class="form-select" wire:model='newOption.type'>
-                            <option value="1">{{ __('Text') }}</option>
-                            <option value="2">{{ __('Color') }}</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="modal-body flex items-center justify-between">
-                    {{-- <hr class="flex-1 "> --}}
-
-                    <span class=""> {{ __('Values') }}</span>
-                    <button type="button" class="btn btn-secondary w-20"
-                        wire:click='addFeature'>{{ __('Add') }}</button>
-
-                    {{-- <hr class="flex-1"> --}}
-                </div>
-
+            <div class=" space-y-4">
                 @foreach ($newOption['features'] as $index => $feature)
-                    <div class="modal-body grid grid-cols-12 gap-4 gap-y-3" wire:key='features-{{ $index }}'>
+                    <div class="grid grid-cols-12 gap-4 gap-y-4" wire:key='features-{{ $index }}'>
                         <div class="col-span-12 sm:col-span-6">
                             <label for="modal-form-{{ $index }}-value"
                                 class="form-label">{{ __('Value') }}</label>
@@ -147,27 +109,20 @@
                         <div class="col-span-12 sm:col-span-6">
                             <label for="modal-form-{{ $index }}-description"
                                 class="form-label">{{ __('Description') }}</label>
-                            <input id="modal-form-{{ $index }}-description" type="text"
-                                class="form-control" wire:model='newOption.features.{{ $index }}.description'>
+                            <input id="modal-form-{{ $index }}-description" type="text" class="form-control"
+                                wire:model='newOption.features.{{ $index }}.description'>
                         </div>
                     </div>
                 @endforeach
-                <!-- END: Modal Body -->
-                <!-- BEGIN: Modal Footer -->
-                <div class="modal-footer">
-                    <button type="button" data-tw-dismiss="modal"
-                        class="btn btn-outline-secondary w-20 mr-1">{{ __('Cancel') }}</button>
-                    <button type="button" class="btn btn-primary w-20">{{ __('Send') }}</button>
-                </div>
-                <!-- END: Modal Footer -->
             </div>
-        </div>
-    </div>
+        </x-slot>
+        <x-slot name="footer">
+            <button type="button" class="btn btn-outline-secondary w-20 mr-1"
+                wire:click="$set('openModal', false)">{{ __('Cancel') }}</button>
+            <button type="button" class="btn btn-primary w-20">{{ __('Send') }}</button>
+        </x-slot>
+    </x-dialog-modal>
     <!-- END: Modal Content -->
 
-    <script>
-        Livewire.on('newOptionUpdated', () => {
-            Livewire.update();
-        });
-    </script>
+
 </div>

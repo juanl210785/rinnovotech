@@ -1,5 +1,5 @@
 <!-- BEGIN: Top Bar -->
-<div class="top-bar -mx-4 px-4 md:mx-0 md:px-0">
+<div class="top-bar -mx-4 px-4 md:mx-0 md:px-0 z-40">
 
     <!-- BEGIN: Breadcrumb -->
     @include('layouts.partials.app.breadcrumb')

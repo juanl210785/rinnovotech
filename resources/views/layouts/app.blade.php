@@ -32,7 +32,7 @@
     <div class="flex mt-[4.7rem] md:mt-0 overflow-hidden">
 
         <!-- BEGIN: Side Menu -->
-        @include('layouts.partials.app.side_bar');
+        @include('layouts.partials.app.side_bar')
         <!-- END: Side Menu -->
 
         <!-- BEGIN: Content -->
