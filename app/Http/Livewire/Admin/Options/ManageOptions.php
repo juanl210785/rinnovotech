@@ -16,8 +16,8 @@ class ManageOptions extends Component
         'features' => [
             [
                 'value' => '',
-                'description' => ''
-            ]
+                'description' => '',
+            ],
         ]
     ];
 
@@ -26,8 +26,14 @@ class ManageOptions extends Component
         $this->options = Option::with('features')->get();
     }
 
-    public function addFeatures() : Returntype {
-        
+    public function addFeature()
+    {
+        $this->newOption['features'][] = [
+            'value' => '',
+            'description' => ''
+        ];
+
+        $this->emit('newOptionUpdated');
     }
 
     public function render()

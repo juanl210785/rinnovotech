@@ -21,15 +21,5 @@
         <!-- END: Modal Toggle -->
     </div>
 
-    <div id="app">
-        @livewire('admin.options.manage-options')
-    </div>
-
-    @push('js')
-        <script>
-            new Vue({
-                el: '#app',
-            });
-        </script>
-    @endpush
+    @livewire('admin.options.manage-options')
 </x-app-layout>
