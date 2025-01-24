@@ -73,6 +73,7 @@
     <x-dialog-modal wire:model='openModal'>
         <x-slot name="title">{{ __('Create new option') }}</x-slot>
         <x-slot name="content">
+            <x-validation-errors class="mb-4"/>
             <div class="grid grid-cols-12 gap-4 gap-y-3">
                 <div class="col-span-12 sm:col-span-6">
                     <label for="modal-form-1" class="form-label">{{ __('Name') }}</label>
@@ -80,7 +81,7 @@
                 </div>
                 <div class="col-span-12 sm:col-span-6">
                     <label for="modal-form-6" class="form-label">{{ __('Type') }}</label>
-                    <select id="modal-form-6" class="form-select" wire:model='newOption.type'>
+                    <select id="modal-form-6" class="form-select" wire:model.live='newOption.type'>
                         <option value="1">{{ __('Text') }}</option>
                         <option value="2">{{ __('Color') }}</option>
                     </select>
@@ -103,8 +104,20 @@
                         <div class="col-span-12 sm:col-span-6">
                             <label for="modal-form-{{ $index }}-value"
                                 class="form-label">{{ __('Value') }}</label>
-                            <input id="modal-form-{{ $index }}-value" type="text" class="form-control"
+                            @switch($newOption['type'])
+                                @case(1)
+                                <input id="modal-form-{{ $index }}-value" type="text" class="form-control"
                                 wire:model='newOption.features.{{ $index }}.value'>
+                                    @break
+                                @case(2)
+                                    <div class="border border-gray-300 h-[38px] rounded-md flex items-center justify-between px-3">
+                                        <span>{{$newOption['features'][$index]['value'] ?: 'Selecciona un color'}}</span>
+                                        <input type="color" wire:model.live='newOption.features.{{ $index }}.value'>
+                                    </div>
+                                    @break
+                                @default
+                                    
+                            @endswitch
                         </div>
                         <div class="col-span-12 sm:col-span-6">
                             <label for="modal-form-{{ $index }}-description"
@@ -119,7 +132,7 @@
         <x-slot name="footer">
             <button type="button" class="btn btn-outline-secondary w-20 mr-1"
                 wire:click="$set('openModal', false)">{{ __('Cancel') }}</button>
-            <button type="button" class="btn btn-primary w-20">{{ __('Send') }}</button>
+            <button type="button" wire:click="addOption" class="btn btn-primary w-20">{{ __('Send') }}</button>
         </x-slot>
     </x-dialog-modal>
     <!-- END: Modal Content -->
