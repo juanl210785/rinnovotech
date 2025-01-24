@@ -23,6 +23,9 @@
     @vite('resources/css/app.css')
     <!-- END: CSS Assets-->
 
+    {{-- FontAwesome --}}
+    <script src="https://kit.fontawesome.com/8904727aa4.js" crossorigin="anonymous"></script>
+
     {{-- Styles --}}
     @livewireStyles
 </head>

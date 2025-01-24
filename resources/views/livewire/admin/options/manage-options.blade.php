@@ -1,4 +1,4 @@
-<div> {{-- class="intro-y flex items-center justify-between mt-8 mb-8" --}}
+<div>
 
     <div class="intro-y flex items-center justify-between mt-8 mb-8">
         <h2 class="text-lg font-medium mr-auto">
@@ -55,7 +55,7 @@
 
                                     <button
                                         class="absolute z-10 left-4 -top-2 rounded-full bg-red-500 hover:bg-red-600 h-4 w-4 flex justify-center items-center">
-                                        <i data-lucide="x" class="text-white text-xs"></i>
+                                        <i class="fa-solid fa-xmark text-white"></i>
                                         {{-- <i class="fa-solid fa-xmark text-white text-xs"></i> --}}
                                     </button>
                                 </div>
@@ -73,7 +73,8 @@
     <x-dialog-modal wire:model='openModal'>
         <x-slot name="title">{{ __('Create new option') }}</x-slot>
         <x-slot name="content">
-            <x-validation-errors class="mb-4"/>
+            <x-validation-errors class="mb-4" />
+
             <div class="grid grid-cols-12 gap-4 gap-y-3">
                 <div class="col-span-12 sm:col-span-6">
                     <label for="modal-form-1" class="form-label">{{ __('Name') }}</label>
@@ -89,34 +90,40 @@
             </div>
 
             <div class="flex items-center justify-between my-4">
-                {{-- <hr class="flex-1 "> --}}
-
                 <span class="font-semibold"> {{ __('Values') }}</span>
                 <button type="button" class="btn btn-secondary w-20 font-semibold"
                     wire:click='addFeature'>{{ __('Add') }}</button>
-
-                {{-- <hr class="flex-1"> --}}
             </div>
 
-            <div class=" space-y-4">
+            <div class="space-y-4">
                 @foreach ($newOption['features'] as $index => $feature)
-                    <div class="grid grid-cols-12 gap-4 gap-y-4" wire:key='features-{{ $index }}'>
+                    <div class="grid grid-cols-12 gap-4 gap-y-4 p-6 rounded-md border border-slate-200/60 relative"
+                        wire:key='features-{{ $index }}'>
+                        @if ($index > 0)
+                            <div class="absolute -top-3 box px-4">
+                                <button wire:click='removeFeature({{ $index }})'>
+                                    <i class="fa-solid fa-trash-can text-red-500"></i>
+                                </button>
+                            </div>
+                        @endif
                         <div class="col-span-12 sm:col-span-6">
                             <label for="modal-form-{{ $index }}-value"
                                 class="form-label">{{ __('Value') }}</label>
                             @switch($newOption['type'])
                                 @case(1)
-                                <input id="modal-form-{{ $index }}-value" type="text" class="form-control"
-                                wire:model='newOption.features.{{ $index }}.value'>
-                                    @break
+                                    <input id="modal-form-{{ $index }}-value" type="text" class="form-control"
+                                        wire:model='newOption.features.{{ $index }}.value'>
+                                @break
+
                                 @case(2)
-                                    <div class="border border-gray-300 h-[38px] rounded-md flex items-center justify-between px-3">
-                                        <span>{{$newOption['features'][$index]['value'] ?: 'Selecciona un color'}}</span>
+                                    <div
+                                        class="border border-gray-300 h-[38px] rounded-md flex items-center justify-between px-3">
+                                        <span>{{ $newOption['features'][$index]['value'] ?: 'Selecciona un color' }}</span>
                                         <input type="color" wire:model.live='newOption.features.{{ $index }}.value'>
                                     </div>
-                                    @break
+                                @break
+
                                 @default
-                                    
                             @endswitch
                         </div>
                         <div class="col-span-12 sm:col-span-6">

@@ -9,10 +9,10 @@ class ManageOptions extends Component
 {
 
     public $options;
-    public $openModal = true;
+    public $openModal = false;
     public $newOption = [
         'name' => '',
-        'type' => 2,
+        'type' => 1,
         'features' => [
             [
                 'value' => '',
@@ -36,7 +36,14 @@ class ManageOptions extends Component
         $this->emit('newOptionUpdated');
     }
 
-    public function addOption(){
+    public function removeFeature($index)
+    {
+        unset($this->newOption['features'][$index]);
+        $this->newOption['features'] = array_values($this->newOption['features']);
+    }
+
+    public function addOption()
+    {
 
         //dd($this->newOption);
         $rules = [
@@ -45,15 +52,15 @@ class ManageOptions extends Component
             'newOption.features' => 'required|array|min:1',
         ];
 
-        foreach ( $this->newOption['features'] as $index => $feature) {
+        foreach ($this->newOption['features'] as $index => $feature) {
             if ($this->newOption['type'] == 1) {
-                $rules['newOption.features.'.$index.'.value'] = 'required';
+                $rules['newOption.features.' . $index . '.value'] = 'required';
             } else {
                 //Color
-                $rules['newOption.features.'.$index.'.value'] = 'required|regex:/^#[af0-9]{6}$/i';
+                $rules['newOption.features.' . $index . '.value'] = 'required|regex:/^#[af0-9]{6}$/i';
             }
-            
-            $rules['newOption.features.'.$index.'.description'] = 'required|max:255';
+
+            $rules['newOption.features.' . $index . '.description'] = 'required|max:255';
         }
 
         $this->validate($rules);
@@ -73,13 +80,15 @@ class ManageOptions extends Component
         $this->options = Option::with('features')->get();
 
         $this->reset('openModal', 'newOption');
-        
+
         session()->flash('notification', [
             'clase' => 'text-success',
             'lucide' => 'check-circle',
             'title' => 'Éxito',
-            'message' => '¡Producto ha sido creado!'
+            'message' => '¡Opción ha sido creada!'
         ]);
+
+        redirect()->route('admin.options.index');
     }
 
     public function render()
