@@ -17,5 +17,12 @@
         </x-notification>
     @endif
 
+    <x-notification clase="text-success" lucide="text-success">
+        <x-slot name="title">
+            Éxito
+        </x-slot>
+        ¡Valor ha sido creado!
+    </x-notification>
+
     @livewire('admin.options.manage-options')
 </x-app-layout>

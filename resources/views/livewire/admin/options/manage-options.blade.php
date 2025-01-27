@@ -1,4 +1,12 @@
 <div>
+    @if (session('notification'))
+        <x-notification clase="{{ session('notification.clase') }}" lucide="{{ session('notification.lucide') }}">
+            <x-slot name="title">
+                {{ session('notification.title') }}
+            </x-slot>
+            {{ session('notification.message') }}
+        </x-notification>
+    @endif
 
     <div class="intro-y flex items-center justify-between mt-8 mb-8">
         <h2 class="text-lg font-medium mr-auto">
@@ -24,7 +32,7 @@
                 </div>
 
                 {{-- Valores --}}
-                <div class="flex flex-wrap">
+                <div class="flex flex-wrap mb-4">
                     @foreach ($option->features as $feature)
                         @switch($option->type)
                             @case(1)
@@ -65,6 +73,8 @@
                         @endswitch
                     @endforeach
                 </div>
+
+                @livewire('admin.options.add-new-feature', ['option' => $option], key('add-new-feature-' . $option->id))
             </div>
         @endforeach
     </div>
@@ -144,5 +154,25 @@
     </x-dialog-modal>
     <!-- END: Modal Content -->
 
+    @push('js')
+        @if (session('notification'))
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Clonar y actualizar el contenido con el mensaje de la sesión flash
+                    var notificationContent = $("#success-notification-content").clone().removeClass("hidden");
 
+                    // Mostrar la notificación
+                    Toastify({
+                        node: notificationContent[0],
+                        duration: 10000,
+                        newWindow: true,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        stopOnFocus: true,
+                    }).showToast();
+                });
+            </script>
+        @endif
+    @endpush
 </div>

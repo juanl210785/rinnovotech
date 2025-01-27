@@ -21,9 +21,31 @@ class ManageOptions extends Component
         ]
     ];
 
+    public $receivedMessage;
+
+    protected $listeners = ['featureAdded'];
+
+    protected $validationAttributes = [
+        'newOption.name' => 'nombre',
+        'newOption.type' => 'tipo',
+        'newOption.features' => 'valores',
+    ];
+
     public function mount()
     {
         $this->options = Option::with('features')->get();
+    }
+
+    public function featureAdded()
+    {
+        $this->options = Option::with('features')->get();
+
+        session()->flash('notification', [
+            'clase' => 'text-success',
+            'lucide' => 'text-success',
+            'title' => 'Éxito',
+            'message' => '¡Valor ha sido creado!'
+        ]);
     }
 
     public function addFeature()
@@ -44,8 +66,6 @@ class ManageOptions extends Component
 
     public function addOption()
     {
-
-        //dd($this->newOption);
         $rules = [
             'newOption.name' => 'required',
             'newOption.type' => 'required|in:1,2',
@@ -61,6 +81,9 @@ class ManageOptions extends Component
             }
 
             $rules['newOption.features.' . $index . '.description'] = 'required|max:255';
+
+            $this->validationAttributes['newOption.features.' . $index . '.value'] = 'valor ' . $index + 1;
+            $this->validationAttributes['newOption.features.' . $index . '.description'] = 'descripción ' . $index + 1;
         }
 
         $this->validate($rules);
