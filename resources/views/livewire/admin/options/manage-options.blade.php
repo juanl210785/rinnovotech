@@ -1,12 +1,4 @@
 <div>
-    @if (session('notification'))
-        <x-notification clase="{{ session('notification.clase') }}" lucide="{{ session('notification.lucide') }}">
-            <x-slot name="title">
-                {{ session('notification.title') }}
-            </x-slot>
-            {{ session('notification.message') }}
-        </x-notification>
-    @endif
 
     <div class="intro-y flex items-center justify-between mt-8 mb-8">
         <h2 class="text-lg font-medium mr-auto">
@@ -15,8 +7,8 @@
 
         <!-- BEGIN: Modal Toggle -->
         <div class="text-center">
-            <button class="btn btn-primary" wire:click="$set('openModal', true)"><i data-lucide="plus"
-                    class="mr-1"></i>{{ __('Create') }}</button>
+            
+            <button class="btn btn-primary" wire:click="$set('openModal', true)">{{ __('Create') }}</button>
         </div>
         <!-- END: Modal Toggle -->
     </div>
@@ -38,7 +30,7 @@
                             @case(1)
                                 {{-- texto --}}
                                 <span id="badge-dismiss-dark"
-                                    class="inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-gray-800 bg-gray-100 rounded dark:bg-gray-700 dark:text-gray-300">
+                                    class="mb-2 inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-gray-800 bg-gray-100 rounded dark:bg-gray-700 dark:text-gray-300">
                                     {{ $feature->description }}
                                     <button type="button"
                                         class="inline-flex items-center p-1 ms-2 text-sm text-gray-400 bg-transparent rounded-sm hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-gray-300"
@@ -63,7 +55,12 @@
 
                                     <button
                                         class="absolute z-10 left-4 -top-2 rounded-full bg-red-500 hover:bg-red-600 h-4 w-4 flex justify-center items-center">
-                                        <i class="fa-solid fa-xmark text-white"></i>
+                                        <svg class="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            fill="none" viewBox="0 0 14 14">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                        </svg>
+                                        {{-- <i class="fa-solid fa-xmark text-white"></i> --}}
                                         {{-- <i class="fa-solid fa-xmark text-white text-xs"></i> --}}
                                     </button>
                                 </div>
@@ -152,27 +149,37 @@
             <button type="button" wire:click="addOption" class="btn btn-primary w-20">{{ __('Send') }}</button>
         </x-slot>
     </x-dialog-modal>
-    <!-- END: Modal Content -->
+    <!-- END: Modal Content <i class="fa-regular fa-circle-xmark"></i> -->
 
     @push('js')
-        @if (session('notification'))
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    // Clonar y actualizar el contenido con el mensaje de la sesión flash
-                    var notificationContent = $("#success-notification-content").clone().removeClass("hidden");
+        <script>
+            document.addEventListener('livewire:load', function() {
+                window.addEventListener('showNotification', event => {
+                    console.log(event.detail.clase);
+
+                    // Crear y configurar el contenido de la notificación
+                    let notificationContent = document.createElement('div');
+                    notificationContent.innerHTML = `
+                    <div id="success-notification-content" class="toastify-content flex">
+                        <i class="${event.detail.clase}"></i>
+                        <div class="ml-4 mr-4">
+                            <div class="font-medium">${event.detail.title}</div>
+                            <div class="text-slate-500 mt-1">${event.detail.message}</div>
+                        </div>
+                    </div>
+                `;
 
                     // Mostrar la notificación
                     Toastify({
-                        node: notificationContent[0],
+                        node: notificationContent,
                         duration: 10000,
-                        newWindow: true,
                         close: true,
-                        gravity: "top",
-                        position: "right",
-                        stopOnFocus: true,
+                        gravity: 'top',
+                        position: 'right',
                     }).showToast();
                 });
-            </script>
-        @endif
+            });
+        </script>
     @endpush
+
 </div>

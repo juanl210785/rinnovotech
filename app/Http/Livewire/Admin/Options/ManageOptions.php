@@ -40,11 +40,11 @@ class ManageOptions extends Component
     {
         $this->options = Option::with('features')->get();
 
-        session()->flash('notification', [
-            'clase' => 'text-success',
-            'lucide' => 'text-success',
-            'title' => 'Éxito',
-            'message' => '¡Valor ha sido creado!'
+        $this->dispatchBrowserEvent('showNotification', [
+            'message' => '¡Valor ha sido creado1!',
+            'clase' => 'fa-regular fa-circle-check',
+            'lucide' => 'x-circle',
+            'title' => 'Éxito'
         ]);
     }
 

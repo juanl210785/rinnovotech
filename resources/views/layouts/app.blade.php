@@ -19,11 +19,14 @@
     {{-- Tostify CSS --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
+    <!-- flaticon -->
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-brands/css/uicons-brands.css'>
+
     <!-- BEGIN: CSS Assets-->
     @vite('resources/css/app.css')
     <!-- END: CSS Assets-->
 
-    {{-- FontAwesome --}}
+    <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/8904727aa4.js" crossorigin="anonymous"></script>
 
     {{-- Styles --}}

@@ -34,7 +34,7 @@ class AddNewFeature extends Component
 
         $this->reset('newFeature');
 
-        $this->emitUp('featureAdded');
+        $this->emit('featureAdded');
     }
 
     public function render()
