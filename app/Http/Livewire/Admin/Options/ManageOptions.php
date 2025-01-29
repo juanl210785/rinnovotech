@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Options;
 
+use App\Models\Feature;
 use App\Models\Option;
 use Livewire\Component;
 
@@ -23,7 +24,8 @@ class ManageOptions extends Component
 
     public $receivedMessage;
 
-    protected $listeners = ['featureAdded'];
+    protected $listeners = ['featureAdded', 'featureRemoved'];
+
 
     protected $validationAttributes = [
         'newOption.name' => 'nombre',
@@ -39,13 +41,30 @@ class ManageOptions extends Component
     public function featureAdded()
     {
         $this->options = Option::with('features')->get();
-
+        //fa-circle-check
+        //fa-circle-xmark
+        //text-danger
+        //text-primary
         $this->dispatchBrowserEvent('showNotification', [
-            'message' => '¡Valor ha sido creado1!',
-            'clase' => 'fa-regular fa-circle-check',
-            'lucide' => 'x-circle',
+            'message' => '¡Valor ha sido creado!',
+            'clase' => 'fa-circle-check',
+            'lucide' => 'text-primary',
             'title' => 'Éxito'
         ]);
+    }
+
+    public function featureRemoved()
+    {
+        $this->options = Option::with('features')->get();
+
+        $this->dispatchBrowserEvent('showNotification', [
+            'message' => '¡Valor ha sido eliminado!',
+            'clase' => 'fa-circle-check',
+            'lucide' => 'text-primary',
+            'title' => 'Éxito'
+        ]);
+
+        $this->render();
     }
 
     public function addFeature()
@@ -112,6 +131,13 @@ class ManageOptions extends Component
         ]);
 
         redirect()->route('admin.options.index');
+    }
+
+    public function deleteFeature(Feature $feature)
+    {
+        $feature->delete();
+
+        $this->emit('featureRemoved');
     }
 
     public function render()

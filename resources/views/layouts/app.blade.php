@@ -88,6 +88,34 @@
             });
         </script>
     @endif
+
+    <script>
+        document.addEventListener('livewire:load', function() {
+            window.addEventListener('showNotification', event => {
+
+                // Crear y configurar el contenido de la notificación 
+                let notificationContent = document.createElement('div');
+                notificationContent.innerHTML = `
+                <div id="success-notification-content" class="toastify-content flex items-center">
+                    <i class="fa-regular ${event.detail.clase} text-2xl ${event.detail.lucide}"></i>
+                    <div class="ml-4 mr-4">
+                        <div class="font-medium">${event.detail.title}</div>
+                        <div class="text-slate-500 mt-1">${event.detail.message}</div>
+                    </div>
+                </div>
+            `;
+
+                // Mostrar la notificación
+                Toastify({
+                    node: notificationContent,
+                    duration: 10000,
+                    close: true,
+                    gravity: 'top',
+                    position: 'right',
+                }).showToast();
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -7,8 +7,9 @@
 
         <!-- BEGIN: Modal Toggle -->
         <div class="text-center">
-            
-            <button class="btn btn-primary" wire:click="$set('openModal', true)">{{ __('Create') }}</button>
+
+            <button class="btn btn-primary" wire:click="$set('openModal', true)"><i
+                    class="fa-solid fa-plus mr-2"></i>{{ __('Create') }}</button>
         </div>
         <!-- END: Modal Toggle -->
     </div>
@@ -32,7 +33,7 @@
                                 <span id="badge-dismiss-dark"
                                     class="mb-2 inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-gray-800 bg-gray-100 rounded dark:bg-gray-700 dark:text-gray-300">
                                     {{ $feature->description }}
-                                    <button type="button"
+                                    <button type="button" wire:click="deleteFeature({{ $feature->id }})"
                                         class="inline-flex items-center p-1 ms-2 text-sm text-gray-400 bg-transparent rounded-sm hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-gray-300"
                                         data-dismiss-target="#badge-dismiss-dark" aria-label="Remove">
                                         <svg class="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +54,7 @@
                                         style="background-color: {{ $feature->value }}" title="{{ $feature->description }}">
                                     </span>
 
-                                    <button
+                                    <button wire:click.live="deleteFeature({{ $feature }})"
                                         class="absolute z-10 left-4 -top-2 rounded-full bg-red-500 hover:bg-red-600 h-4 w-4 flex justify-center items-center">
                                         <svg class="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             fill="none" viewBox="0 0 14 14">
@@ -150,36 +151,5 @@
         </x-slot>
     </x-dialog-modal>
     <!-- END: Modal Content <i class="fa-regular fa-circle-xmark"></i> -->
-
-    @push('js')
-        <script>
-            document.addEventListener('livewire:load', function() {
-                window.addEventListener('showNotification', event => {
-                    console.log(event.detail.clase);
-
-                    // Crear y configurar el contenido de la notificación
-                    let notificationContent = document.createElement('div');
-                    notificationContent.innerHTML = `
-                    <div id="success-notification-content" class="toastify-content flex">
-                        <i class="${event.detail.clase}"></i>
-                        <div class="ml-4 mr-4">
-                            <div class="font-medium">${event.detail.title}</div>
-                            <div class="text-slate-500 mt-1">${event.detail.message}</div>
-                        </div>
-                    </div>
-                `;
-
-                    // Mostrar la notificación
-                    Toastify({
-                        node: notificationContent,
-                        duration: 10000,
-                        close: true,
-                        gravity: 'top',
-                        position: 'right',
-                    }).showToast();
-                });
-            });
-        </script>
-    @endpush
 
 </div>
