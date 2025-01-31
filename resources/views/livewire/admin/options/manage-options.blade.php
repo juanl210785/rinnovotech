@@ -19,9 +19,12 @@
         @foreach ($options as $option)
             <div class="p-6 rounded-md border border-slate-200/60 relative" wire:key="option-{{ $option->id }}">
                 <div class="absolute -top-3 box px-4">
-                    <span>
+                    <span class="mr-2">
                         {{ $option->name }}
                     </span>
+                    <button wire:click='deleteOption({{ $option->id }})'>
+                        <i class="fa-solid fa-trash-can text-red-500"></i>
+                    </button>
                 </div>
 
                 {{-- Valores --}}
@@ -30,7 +33,7 @@
                         @switch($option->type)
                             @case(1)
                                 {{-- texto --}}
-                                <span id="badge-dismiss-dark"
+                                <span id="badge-dismiss-dark" wire:key="feature-{{ $feature->id }}"
                                     class="mb-2 inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-gray-800 bg-gray-100 rounded dark:bg-gray-700 dark:text-gray-300">
                                     {{ $feature->description }}
                                     <button type="button" wire:click="deleteFeature({{ $feature->id }})"
@@ -48,7 +51,7 @@
 
                             @case(2)
                                 {{-- color --}}
-                                <div class="relative">
+                                <div class="relative" wire:key="feature-{{ $feature->id }}">
                                     <span
                                         class="tooltip inline-block h-8 w-8 shadow-lg rounded-full border border-r-gray-300 mr-4"
                                         style="background-color: {{ $feature->value }}" title="{{ $feature->description }}">
@@ -61,8 +64,6 @@
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                                 stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                         </svg>
-                                        {{-- <i class="fa-solid fa-xmark text-white"></i> --}}
-                                        {{-- <i class="fa-solid fa-xmark text-white text-xs"></i> --}}
                                     </button>
                                 </div>
                             @break
