@@ -24,7 +24,7 @@ class ManageOptions extends Component
 
     public $receivedMessage;
 
-    protected $listeners = ['featureAdded', 'featureRemoved'];
+    protected $listeners = ['featureAdded'];
 
 
     protected $validationAttributes = [
@@ -53,20 +53,6 @@ class ManageOptions extends Component
         ]);
     }
 
-    public function featureRemoved()
-    {
-        $this->options = Option::with('features')->get();
-
-        $this->dispatchBrowserEvent('showNotification', [
-            'message' => '¡Valor ha sido eliminado!',
-            'clase' => 'fa-circle-check',
-            'lucide' => 'text-primary',
-            'title' => 'Éxito'
-        ]);
-
-        $this->render();
-    }
-
     public function addFeature()
     {
         $this->newOption['features'][] = [
@@ -85,12 +71,12 @@ class ManageOptions extends Component
 
     public function addOption()
     {
+        //Validamos las entradas
         $rules = [
             'newOption.name' => 'required',
             'newOption.type' => 'required|in:1,2',
             'newOption.features' => 'required|array|min:1',
         ];
-
         foreach ($this->newOption['features'] as $index => $feature) {
             if ($this->newOption['type'] == 1) {
                 $rules['newOption.features.' . $index . '.value'] = 'required';
@@ -123,21 +109,40 @@ class ManageOptions extends Component
 
         $this->reset('openModal', 'newOption');
 
-        session()->flash('notification', [
-            'clase' => 'text-success',
-            'lucide' => 'check-circle',
-            'title' => 'Éxito',
-            'message' => '¡Opción ha sido creada!'
+        $this->dispatchBrowserEvent('showNotification', [
+            'message' => 'Opción ha sido creada!',
+            'clase' => 'fa-circle-check',
+            'lucide' => 'text-primary',
+            'title' => 'Éxito'
         ]);
-
-        redirect()->route('admin.options.index');
     }
 
     public function deleteFeature(Feature $feature)
     {
         $feature->delete();
 
-        $this->emit('featureRemoved');
+        $this->options = Option::with('features')->get();
+
+        $this->dispatchBrowserEvent('showNotification', [
+            'message' => '¡Valor ha sido eliminado!',
+            'clase' => 'fa-circle-check',
+            'lucide' => 'text-primary',
+            'title' => 'Éxito'
+        ]);
+    }
+
+    public function deleteOption(Option $option)
+    {
+        $option->delete();
+
+        $this->options = Option::with('features')->get();
+
+        $this->dispatchBrowserEvent('showNotification', [
+            'message' => '¡Opción ha sido eliminada!',
+            'clase' => 'fa-circle-check',
+            'lucide' => 'text-primary',
+            'title' => 'Éxito'
+        ]);
     }
 
     public function render()
