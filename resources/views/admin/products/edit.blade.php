@@ -24,16 +24,17 @@
     <div class="intro-y flex items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">{{ __('Edit Product') }}</h2>
     </div>
-    <div class="grid grid-cols-11 gap-x-6 mt-5 pb-20">
+    <div class="grid grid-cols-11 gap-x-6 mt-5 pb-1">
 
         <div class="intro-y col-span-11 2xl:col-span-9">
 
-            @livewire('admin.products.products-edit', ['product' => $product])
-
+            @livewire('admin.products.products-edit', ['product' => $product], key('products-edit'. $product->id))
             {{-- Aqui va la parte 1 --}}
         </div>
 
         {{-- Aqui va parte 2 --}}
     </div>
+
+    @livewire('admin.products.product-variants', ['product' => $product], key('product-variants'. $product->id))
 
 </x-app-layout>
