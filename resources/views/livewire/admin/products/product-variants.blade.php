@@ -24,6 +24,7 @@
         </x-slot>
 
         <x-slot name="content">
+            <x-validation-errors class="mb-4" />
             <div class="w-full">
                 <label for="modal-form-6" class="form-label">{{ __('Type') }}</label>
                 <select id="modal-form-6" class="form-select" wire:model.live='variant.option_id'>
@@ -56,14 +57,13 @@
                             <label for="modal-form-{{ $index }}-value"
                                 class="form-label">{{ __('Value') }}</label>
 
-                                <select id="modal-form-6" class="form-select" wire:model='variant.features.{{$index}}.id'>
+                                <select id="modal-form-6" class="form-select" wire:model='variant.features.{{$index}}.id' 
+                                        wire:change="feature_change({{$index}})">
                                     <option value="" disabled>{{ __('Select an value')}}</option>
                                     @foreach ($this->features as $feature)
                                         <option value="{{$feature->id}}" @selected(old('variant.option_id') == $feature->id)>{{ $feature->description }}</option>
                                     @endforeach                                    
                                 </select>
-
-                                {{$variant['features'][$index]['id']}}
                         </div>
                     </li>
                 @endforeach
@@ -71,6 +71,9 @@
         </x-slot>
 
         <x-slot name="footer">
+            <button type="button" class="btn btn-outline-secondary w-20 mr-1"
+                wire:click="$set('openModal', false)">{{ __('Cancel') }}</button>
+            <button type="button" wire:click="save" class="btn btn-primary w-20">{{ __('Save') }}</button>
         </x-slot>
         
     </x-dialog-modal>
