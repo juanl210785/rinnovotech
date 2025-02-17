@@ -72,6 +72,23 @@ class ProductVariants extends Component
         $this->variant['features'] = array_values($this->variant['features']);
     }
 
+    public function deleteProductFeature($option_id, $feature_id){
+
+        dd(
+            array_filter($this->product->options->find($option_id)->pivot->features, function ($feature) use ($feature_id) {
+                return $feature['id'] != $feature_id;
+            })
+        );
+
+        /* $this->product->options()->updateExistingPivot($option_id, [
+            'features' => array_filter($this->product->options->find($option_id)->pivot->features, function ($feature) use ($feature_id) {
+                return $feature['id'] != $feature_id;
+            })
+        ]); */
+
+        //$this->product = $this->product->fresh();
+    }
+
     public function save(){
         $this->validate([
             'variant.option_id' => 'required',
@@ -88,6 +105,8 @@ class ProductVariants extends Component
         ]);
 
         $this->reset('variant', 'openModal');
+
+        $this->product = $this->product->fresh();
 
         $this->dispatchBrowserEvent('showNotification', [
             'message' => 'Variante ha sido creada!',
