@@ -12,8 +12,6 @@
                 </div>
             </div>
 
-
-
             @if ($product->options->count())
                 <div class="mt-4 space-y-6">
                     @foreach ($product->options as $option)
