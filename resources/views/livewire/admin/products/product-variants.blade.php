@@ -12,8 +12,6 @@
                 </div>
             </div>
 
-
-
             @if ($product->options->count())
                 <div class="mt-4 space-y-6">
                     @foreach ($product->options as $option)
@@ -61,7 +59,8 @@
                                                     title="{{ $feature['description'] }}">
                                                 </span>
 
-                                                <button wire:click.live="deleteFeature({{ $feature['id'] }})"
+                                                <button
+                                                    onclick="deleteProductFeature({{ $option->id }}, {{ $feature['id'] }})"
                                                     class="absolute z-10 left-4 -top-2 rounded-full bg-red-500 hover:bg-red-600 h-4 w-4 flex justify-center items-center">
                                                     <svg class="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                         fill="none" viewBox="0 0 14 14">
@@ -205,13 +204,7 @@
                     confirmButtonText: "Si, eliminalo!"
                 }).then((result) => {
                     if (result.isConfirmed) {
-
                         @this.call('deleteProductOption', option_id)
-                        /* Swal.fire({
-                            title: "¡Eliminado!",
-                            text: "El elemento ha sido eliminado",
-                            icon: "success"
-                        }); */
                     }
                 });
             }

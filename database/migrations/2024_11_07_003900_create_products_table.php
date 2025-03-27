@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('status')->default(Product::ACTIVE);
             $table->string('condition')->nullable();
             $table->integer('stock');
-            $table->foreignId('subcategory_id')->constrained();
+            $table->foreignId('subcategory_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

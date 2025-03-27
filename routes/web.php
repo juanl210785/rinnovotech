@@ -7,6 +7,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\DarkModeController;
 use App\Http\Controllers\ColorSchemeController;
+use App\Models\Product;
+use App\Models\Variant;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +40,55 @@ Route::get('color-scheme-switcher/{color_scheme}', [ColorSchemeController::class
     Route::get('login', 'loginView')->name('login.index');
     Route::post('login', 'login')->name('login.check');
 }); */
+
+Route::get('prueba', function () {
+    /* $array1 = ['a', 'b', 'c'];
+    $array2 = ['a', 'b', 'c'];
+    $array3 = ['a', 'b', 'c'];
+
+    $arrays = [$array1, $array2, $array3];
+
+    $combinaciones = generarCombinaciones($arrays);
+
+    return $combinaciones; */
+
+    $product =  Product::find(51);
+
+    $features = $product->options->pluck('pivot.features');
+
+    $combinaciones = generarCombinaciones($features);
+
+    $product->variants()->delete();
+
+    foreach ($combinaciones as $combinacion) {
+        $variant = Variant::create([
+            'product_id' => $product->id
+        ]);
+
+        $variant->features()->attach($combinacion);
+    }
+
+    return 'Variantes creadas';
+});
+
+function generarCombinaciones($arrays, $indice = 0, $combinacion = [])
+{
+
+    if ($indice == count($arrays)) {
+        return [$combinacion];
+    }
+
+    $resultado = [];
+
+    foreach ($arrays[$indice] as $item) {
+        $combinacionTemporal = $combinacion;
+        $combinacionTemporal[] = $item['id'];
+
+        $resultado = array_merge($resultado, generarCombinaciones($arrays, $indice + 1, $combinacionTemporal));
+    }
+
+    return $resultado;
+}
 
 Route::middleware('auth')->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
