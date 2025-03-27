@@ -10,79 +10,100 @@
                     <button class="btn btn-primary" wire:click="$set('openModal', true)"><i
                             class="fa-solid fa-plus mr-2"></i>{{ __('Create') }}</button>
                 </div>
-            </div> 
-            
-            
+            </div>
+
+
 
             @if ($product->options->count())
-            <div class="mt-4 space-y-6">
-                @foreach ($product->options as $option)
-                    <div class="p-6 rounded-md border border-slate-200/60 relative"
-                        wire:key="option-product-{{ $option->id }}">
-                        <div class="absolute -top-3 box px-4">
-                            <span class="mr-2">
-                                {{ $option->name }}
-                            </span>
-                            <button onclick="deleteProductOption({{ $option->id }})">
-                                <i class="fa-solid fa-trash-can text-red-500"></i>
-                            </button>
-                        </div>
+                <div class="mt-4 space-y-6">
+                    @foreach ($product->options as $option)
+                        <div class="p-6 rounded-md border border-slate-200/60 relative"
+                            wire:key="option-product-{{ $option->id }}">
+                            <div class="absolute -top-3 box px-4">
+                                <span class="mr-2">
+                                    {{ $option->name }}
+                                </span>
+                                <button onclick="deleteProductOption({{ $option->id }})">
+                                    <i class="fa-solid fa-trash-can text-red-500"></i>
+                                </button>
+                            </div>
 
-                        {{-- Valores --}}
-                        <div class="flex flex-wrap mb-4">
-                            @foreach ($option->pivot->features as $feature)
-                                @switch($option->type)
-                                    @case(1)
-                                        {{-- texto --}}
-                                        <span id="badge-dismiss-dark" wire:key="feature-text-{{ $feature['id'] }}"
-                                            class="mb-2 inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-gray-800 bg-gray-100 rounded dark:bg-gray-700 dark:text-gray-300">
-                                            {{ $feature['description'] }}
-                                            <button type="button"
-                                                onclick="deleteProductFeature({{ $option->id }}, {{$feature['id']}})"
-                                                class="inline-flex items-center p-1 ms-2 text-sm text-gray-400 bg-transparent rounded-sm hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-gray-300"
-                                                data-dismiss-target="#badge-dismiss-dark" aria-label="Remove">
-                                                <svg class="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none" viewBox="0 0 14 14">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                                </svg>
-                                                <span class="sr-only">Remove badge</span>
-                                            </button>
-                                        </span>
-                                    @break
-
-                                    @case(2)
-                                        {{-- color --}}
-                                        <div class="relative" wire:key="feature-color-{{ $feature['id'] }}">
-                                            <span
-                                                class="tooltip inline-block h-8 w-8 shadow-lg rounded-full border border-r-gray-300 mr-4"
-                                                style="background-color: {{ $feature['value'] }}"
-                                                title="{{ $feature['description'] }}">
+                            {{-- Valores --}}
+                            <div class="flex flex-wrap mb-4">
+                                @foreach ($option->pivot->features as $feature)
+                                    @switch($option->type)
+                                        @case(1)
+                                            {{-- texto --}}
+                                            <span id="badge-dismiss-dark" wire:key="feature-text-{{ $feature['id'] }}"
+                                                class="mb-2 inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-gray-800 bg-gray-100 rounded dark:bg-gray-700 dark:text-gray-300">
+                                                {{ $feature['description'] }}
+                                                <button type="button"
+                                                    onclick="deleteProductFeature({{ $option->id }}, {{ $feature['id'] }})"
+                                                    class="inline-flex items-center p-1 ms-2 text-sm text-gray-400 bg-transparent rounded-sm hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-gray-300"
+                                                    data-dismiss-target="#badge-dismiss-dark" aria-label="Remove">
+                                                    <svg class="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none" viewBox="0 0 14 14">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                    </svg>
+                                                    <span class="sr-only">Remove badge</span>
+                                                </button>
                                             </span>
+                                        @break
 
-                                            <button wire:click.live="deleteFeature({{ $feature['id'] }})"
-                                                class="absolute z-10 left-4 -top-2 rounded-full bg-red-500 hover:bg-red-600 h-4 w-4 flex justify-center items-center">
-                                                <svg class="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none" viewBox="0 0 14 14">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    @break
+                                        @case(2)
+                                            {{-- color --}}
+                                            <div class="relative" wire:key="feature-color-{{ $feature['id'] }}">
+                                                <span
+                                                    class="tooltip inline-block h-8 w-8 shadow-lg rounded-full border border-r-gray-300 mr-4"
+                                                    style="background-color: {{ $feature['value'] }}"
+                                                    title="{{ $feature['description'] }}">
+                                                </span>
 
-                                    @default
-                                @endswitch
-                            @endforeach
+                                                <button wire:click.live="deleteFeature({{ $feature['id'] }})"
+                                                    class="absolute z-10 left-4 -top-2 rounded-full bg-red-500 hover:bg-red-600 h-4 w-4 flex justify-center items-center">
+                                                    <svg class="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none" viewBox="0 0 14 14">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        @break
+
+                                        @default
+                                    @endswitch
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
+                    @endforeach
+                </div>
             @else
-            <div class="alert alert-pending show flex items-center mt-4 mb-2 " role="alert">
-                <i data-lucide="alert-triangle" class="w-6 h-6 mr-2"></i> No existen opciones agregadas al producto
-            </div>
+                <div class="alert alert-pending show flex items-center mt-4 mb-2 " role="alert">
+                    <i data-lucide="alert-triangle" class="w-6 h-6 mr-2"></i> No existen opciones agregadas al producto
+                </div>
             @endif
+        </div>
+    </div>
+
+    <div class="intro-y box p-5 mt-5">
+        <div class="border border-slate-200/60 rounded-md p-5">
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-medium mr-auto">
+                    {{ __('Variants') }}
+                </h2>
+            </div>
+
+            <div class="p-6">
+                <ul>
+                    @foreach ($product->variants as $variant)
+                    @endforeach
+                </ul>
+            </div>
+
+
         </div>
     </div>
 
