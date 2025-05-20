@@ -23,7 +23,7 @@ return new class extends Migration
             $table->float('price');
             $table->string('status')->default(Product::ACTIVE);
             $table->string('condition')->nullable();
-            $table->integer('stock');
+            $table->integer('stock')->default(0)->unsigned();
             $table->foreignId('subcategory_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

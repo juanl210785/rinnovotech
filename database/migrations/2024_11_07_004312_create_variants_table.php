@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('sku')->nullable();
             $table->string('image_path')->nullable();
+            $table->integer('stock')->default(0)->unsigned();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

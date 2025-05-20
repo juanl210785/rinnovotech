@@ -281,22 +281,23 @@
                         </div>
                     </div>
 
-                    {{-- Precio e Inventario --}}
+                    {{-- Precio --}}
                     <div class="form-inline items-start flex-col xl:flex-row mt-5 pt-5 first:mt-0 first:pt-0">
                         <div class="form-label xl:w-64 xl:!mr-10">
                             <div class="text-left">
                                 <div class="flex items-center">
-                                    <div class="font-medium">{{ __('Stock and Price') }}</div>
+                                    <div class="font-medium">{{ __('Price') }}</div>
                                     <div class="ml-2 px-2 py-0.5 bg-slate-200 text-slate-600 text-xs rounded-md">
                                         {{ __('Required') }}</div>
                                 </div>
                                 <div class="leading-relaxed text-slate-500 text-xs mt-3">
-                                    {{ __('Apply price and stock on your product.') }}
+                                    {{ __('Apply price on your product.') }}
                                 </div>
                             </div>
                         </div>
+
                         <div class="w-full mt-3 xl:mt-0 flex-1">
-                            <div class="sm:grid grid-cols-2 gap-2">
+                            <div class=" w-full">
                                 <div>
                                     <div class="input-group">
                                         <div class="input-group-text">$</div>
@@ -305,14 +306,32 @@
                                     </div>
                                     <x-input-error :messages="$errors->get('productEdit.price')" class="mt-2" />
                                 </div>
-                                <div>
-                                    <input type="text" wire:model='productEdit.stock'
-                                        class="form-control mt-2 sm:mt-0" placeholder="{{ __('Stock') }}">
-                                    <x-input-error :messages="$errors->get('productEdit.stock')" class="mt-2" />
-                                </div>
+
                             </div>
                         </div>
                     </div>
+
+                    {{-- Inventario --}}
+                    @empty($product->variants->count() > 0)
+                        <div class="form-inline items-start flex-col xl:flex-row mt-5 pt-5 first:mt-0 first:pt-0">
+                            <div class="form-label xl:w-64 xl:!mr-10">
+                                <div class="text-left">
+                                    <div class="flex items-center">
+                                        <div class="font-medium">{{ __('Stock') }}</div>
+                                        <div class="ml-2 px-2 py-0.5 bg-slate-200 text-slate-600 text-xs rounded-md">
+                                            {{ __('Required') }}</div>
+                                    </div>
+                                    <div class="leading-relaxed text-slate-500 text-xs mt-3">
+                                        {{ __('Apply stock on your product.') }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full mt-3 xl:mt-0 flex-1">
+                                <x-text-input wire:model='productEdit.stock' placeholder="{{ __('Stock') }}" />
+                                <x-input-error :messages="$errors->get('productEdit.stock')" class="mt-2" />
+                            </div>
+                        </div>
+                    @endempty
 
                     {{-- Descripcion --}}
                     <div class="form-inline items-start flex-col xl:flex-row mt-5 pt-5 first:mt-0 first:pt-0">

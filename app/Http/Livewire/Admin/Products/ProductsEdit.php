@@ -22,6 +22,8 @@ class ProductsEdit extends Component
 
     public $productEdit;
 
+    protected $listeners = ['variant-generate' => 'updateProduct'];
+
     public function mount($product)
     {
         $this->productEdit = $product->only('id', 'sku', 'name', 'description', 'image_path', 'price', 'status', 'condition', 'stock', 'subcategory_id');
@@ -42,6 +44,11 @@ class ProductsEdit extends Component
     public function updatedCategoryId()
     {
         $this->product['subcategory_id'] = '';
+    }
+
+    public function updateProduct()
+    {
+        $this->product = $this->product->fresh();
     }
 
     public function getCategoriesProperty()

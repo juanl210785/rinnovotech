@@ -96,9 +96,47 @@
             </div>
 
             <div class="p-6">
-                <ul>
-                    @foreach ($product->variants as $variant)
-                    @endforeach
+                <ul class=" divide-y -my-4">
+                    @if ($product->options->count())
+                        @foreach ($product->variants as $item)
+                            <li class="py-4 flex items-center">
+                                <div class="w-10 h-10 image-fit zoom-in">
+                                    <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
+                                        src="{{$item->image}}">
+                                </div>
+
+                                <p class=" divide-x">
+                                    @foreach ($item->features as $feature)
+                                        <span class=" px-3">
+                                            {{$feature->description}}
+                                        </span>
+                                    @endforeach
+                                </p>
+
+                                <div class="flex ml-auto justify-center items-center">
+                                    <a class="flex items-center mr-3"
+                                        href="{{ route('admin.products.variants', [$product, $item]) }}"> <i
+                                            data-lucide="check-square" class="w-4 h-4 mr-1"></i> {{ __('Edit') }}
+                                    </a>
+
+                                    {{-- <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-modal-preview"
+                                        class="flex items-center text-danger">
+                                        <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> {{ __('Delete') }}
+                                    </a>
+
+                                    <form action="{{ route('admin.products.destroy', $product) }}" method="post"
+                                        id="form-delete">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form> --}}
+                                </div>
+                            </li>
+                        @endforeach
+                    @else
+                        <div class="alert alert-pending show flex items-center mt-4 mb-2 " role="alert">
+                            <i data-lucide="alert-triangle" class="w-6 h-6 mr-2"></i> No existen variantes agregadas al producto
+                        </div>
+                    @endif
                 </ul>
             </div>
 

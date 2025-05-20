@@ -52,7 +52,7 @@ Route::get('prueba', function () {
 
     return $combinaciones; */
 
-    $product =  Product::find(51);
+    $product =  Product::find(53);
 
     $features = $product->options->pluck('pivot.features');
 

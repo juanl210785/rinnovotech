@@ -1,5 +1,6 @@
 {
     "Variants": "Variantes",
+    "Variant": "Variante",
     "Select an value": "Seleccione un valor",
     "Select an option": "Seleccione una opción",
     "Add New Option":"Agregar nueva opción",
@@ -17,7 +18,8 @@
     "Save & Add New": "Guardar y agregar nuevo",
     "If the status is active, your product can be searched for by potential buyers.": "Si el estado es activo, su producto puede ser buscado por compradores potenciales.",
     "Stock and Price": "Inventario y precio",
-    "Apply price and stock on your product.": "Aplica precio y cantidad de inventario a tu producto.",
+    "Apply price on your product.": "Aplica precio a tu producto.",
+    "Apply stock on your product.": "Aplica cantidad de Inventario a tu producto.",
     "Choose from the existing family list.": "Elija de la lista de familias existente.",
     "Choose from the existing category list.": "Elija de la lista de categorías existente.",
     "Choose from the existing subcategory list.": "Elija de la lista de subcategorías existente.",
