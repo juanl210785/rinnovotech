@@ -43,4 +43,36 @@
             </div>
         </x-container>
     </header>
+
+    <div class="fixed top-0 left-0 inset-0 bg-primary bg-opacity-25 z-[80]"></div>
+
+    <div class="fixed top-0 left-0 z-[100]">
+        <div class="flex ">
+            <div class="w-80 h-screen bg-secondary">
+                <div class="px-4 py-3 font-semibold bg-primary text-white">
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg">
+                            {{ __('Families') }}
+                        </span>
+                        <button>
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="h-[calc(100vh-52px)] overflow-auto">
+                    <ul>
+                        @foreach ($families as $family)
+                            <li>
+                                <a href=""
+                                    class="flex items-center justify-between px-4 py-4 text-gray-700 hover:bg-green-400">
+                                    {{ $family->name }}
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
