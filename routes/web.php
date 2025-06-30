@@ -21,25 +21,18 @@ use App\Models\Variant;
 |
 */
 
+Route::get('dark-mode-switcher', [DarkModeController::class, 'switch'])->name('dark-mode-switcher');
+Route::get('color-scheme-switcher/{color_scheme}', [ColorSchemeController::class, 'switch'])->name('color-scheme-switcher');
+
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-/* Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard'); */
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-/* Route::middleware('auth')->group(function () {
-    
-}); */
-
-Route::get('dark-mode-switcher', [DarkModeController::class, 'switch'])->name('dark-mode-switcher');
-Route::get('color-scheme-switcher/{color_scheme}', [ColorSchemeController::class, 'switch'])->name('color-scheme-switcher');
-
-/* Route::controller(AuthController::class)->middleware('loggedin')->group(function() {
-    Route::get('login', 'loginView')->name('login.index');
-    Route::post('login', 'login')->name('login.check');
-}); */
 
 Route::get('prueba', function () {
     /* $array1 = ['a', 'b', 'c'];
@@ -90,7 +83,7 @@ function generarCombinaciones($arrays, $indice = 0, $combinacion = [])
     return $resultado;
 }
 
-Route::middleware('auth')->group(function () {
+/*Route::middleware('auth')->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::controller(PageController::class)->group(function () {
         Route::get('/', 'dashboardOverview1')->name('dashboard-overview-1');
@@ -167,6 +160,6 @@ Route::middleware('auth')->group(function () {
         Route::get('slider-page', 'slider')->name('slider');
         Route::get('image-zoom-page', 'imageZoom')->name('image-zoom');
     });
-});
+});*/
 
 require __DIR__ . '/auth.php';
