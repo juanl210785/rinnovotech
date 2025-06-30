@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link href="{{ asset('img/tienda.png') }}" rel="shortcut icon">
+    <link href="{{ asset('build/assets/images/logo.svg') }}" rel="shortcut icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -16,25 +16,24 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+    <!-- Scripts -->
+    @vite('resources/css/app.css')
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+
+    {{-- Styles --}}
+    @livewireStyles
+
     {{-- Tostify CSS --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     <!-- flaticon -->
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-brands/css/uicons-brands.css'>
 
-    <!-- BEGIN: CSS Assets-->
-    @vite('resources/css/app.css')
-    <!-- END: CSS Assets-->
-
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/8904727aa4.js" crossorigin="anonymous"></script>
-
-    {{-- Styles --}}
-    @livewireStyles
 </head>
 
 <body class="py-5 md:py-0 bg-black/[0.15]">
-    @include('../layout/components/mobile-menu')
     <div class="flex mt-[4.7rem] md:mt-0 overflow-hidden">
 
         <!-- BEGIN: Side Menu -->
@@ -50,7 +49,14 @@
     </div>
 
     @include('../layout/components/dark-mode-switcher')
-    {{-- @include('../layout/components/main-color-switcher') --}}
+    
+
+    <!-- BEGIN: JS Assets-->
+    @vite('resources/js/app.js')
+    <!-- END: JS Assets-->
+
+    {{-- Scripts --}}
+    @livewireScripts
 
     <!-- BEGIN: JS Assets-->
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
@@ -61,14 +67,6 @@
 
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    @vite('resources/js/app.js')
-    <!-- END: JS Assets-->
-
-    {{-- Scripts --}}
-    @livewireScripts
-
-    <!-- My Script -->
 
     @stack('js')
 
@@ -119,6 +117,8 @@
             });
         });
     </script>
+
 </body>
 
 </html>
+

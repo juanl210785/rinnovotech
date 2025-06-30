@@ -59,13 +59,13 @@
     </div>
 
     <!-- BEGIN: Notification Content -->
-    <x-notification-success>
+    {{-- <x-notification-success>
         <x-slot name="title">
             {{ __('Success') }}
         </x-slot>
 
         {{ __('Category edited successfully') }}
-    </x-notification-success>
+    </x-notification-success> --}}
     <!-- END: Notification Content -->
 
     <form action="{{ route('admin.categories.destroy', $category) }}" method="post" id="form-delete">
