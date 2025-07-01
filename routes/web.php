@@ -29,9 +29,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
+/* Route::get('/dashboard', function () {
     return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard'); */
 
 
 Route::get('prueba', function () {
@@ -83,10 +83,10 @@ function generarCombinaciones($arrays, $indice = 0, $combinacion = [])
     return $resultado;
 }
 
-/*Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::controller(PageController::class)->group(function () {
-        Route::get('/', 'dashboardOverview1')->name('dashboard-overview-1');
+        Route::get('/view', 'dashboardOverview1')->name('dashboard-overview-1');
         Route::get('dashboard-overview-2-page', 'dashboardOverview2')->name('dashboard-overview-2');
         Route::get('dashboard-overview-3-page', 'dashboardOverview3')->name('dashboard-overview-3');
         Route::get('dashboard-overview-4-page', 'dashboardOverview4')->name('dashboard-overview-4');
@@ -160,6 +160,6 @@ function generarCombinaciones($arrays, $indice = 0, $combinacion = [])
         Route::get('slider-page', 'slider')->name('slider');
         Route::get('image-zoom-page', 'imageZoom')->name('image-zoom');
     });
-});*/
+});
 
 require __DIR__ . '/auth.php';

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link href="{{ asset('build/assets/images/logo.svg') }}" rel="shortcut icon">
+    <link href="{{ asset('img/tienda.png') }}" rel="shortcut icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -15,6 +15,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- FontAwesome -->
+    {{-- <script src="https://kit.fontawesome.com/8904727aa4.js" crossorigin="anonymous"></script> --}}
     <script src="https://kit.fontawesome.com/8904727aa4.js" crossorigin="anonymous"></script>
 
     <!-- Scripts -->
@@ -31,11 +32,16 @@
     @include('../layout/components/dark-mode-switcher')
 
     <!-- BEGIN: JS Assets-->
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=[" your-google-map-api"]&libraries=places"></script>
     @vite('resources/js/app.js')
     <!-- END: JS Assets-->
 
     {{-- Scripts --}}
     @livewireScripts
+
+    @stack('scripts')
 
 </body>
 
