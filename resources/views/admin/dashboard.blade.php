@@ -1,4 +1,9 @@
-<x-app-layout>
+<x-app-layout :breadcrumbs="[
+    [
+        'name' => __('Dashboard'),
+        'route' => route('admin.dashboard'),
+    ],
+]">
     <div class="col-span-12 grid grid-cols-12 gap-6 mt-8">
         <div class="col-span-12 sm:col-span-6 2xl:col-span-3 intro-y">
             <div class="box p-5 zoom-in">

@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link href="{{ asset('build/assets/images/logo.svg') }}" rel="shortcut icon">
+    <link href="{{ asset('img/tienda.png') }}" rel="shortcut icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -49,7 +49,7 @@
     </div>
 
     @include('../layout/components/dark-mode-switcher')
-    
+
 
     <!-- BEGIN: JS Assets-->
     @vite('resources/js/app.js')
@@ -121,4 +121,3 @@
 </body>
 
 </html>
-

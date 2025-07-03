@@ -15,7 +15,6 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- FontAwesome -->
-    {{-- <script src="https://kit.fontawesome.com/8904727aa4.js" crossorigin="anonymous"></script> --}}
     <script src="https://kit.fontawesome.com/8904727aa4.js" crossorigin="anonymous"></script>
 
     <!-- Scripts -->

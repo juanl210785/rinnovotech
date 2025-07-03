@@ -17,8 +17,14 @@ class Navigation extends Component
         $this->family_id = $this->families->first()->id;
     }
 
-    public function getCategoriesProperty() {
+    public function getCategoriesProperty()
+    {
         return Category::where('family_id', $this->family_id)->with('subcategories')->get();
+    }
+
+    public function getFamilyNameProperty()
+    {
+        return Family::find($this->family_id)->name;
     }
     public function render()
     {

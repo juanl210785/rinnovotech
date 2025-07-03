@@ -45,7 +45,7 @@
     ];
 @endphp
 <nav class="side-nav">
-    <a href="" class="intro-x flex items-center pl-5 pt-4 mt-3">
+    <a href="/" class="intro-x flex items-center pl-5 pt-4 mt-3">
         <img alt="Midone - HTML Admin Template" class="w-6" src="{{ asset('img/tienda.png') }}">
         <span class="hidden xl:block text-white text-lg ml-3">
             {{ config('app.name', 'Eccomerce') }}
