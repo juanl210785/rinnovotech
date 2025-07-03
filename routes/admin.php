@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CoverController;
 use App\Http\Controllers\Admin\FamilyController;
 use App\Http\Controllers\Admin\OptionController;
 use App\Http\Controllers\Admin\ProductController;
@@ -22,6 +23,7 @@ Route::resource('families', FamilyController::class);
 Route::resource('categories', CategoryController::class);
 Route::resource('subcategories', SubcategoryController::class);
 Route::resource('products', ProductController::class);
+Route::resource('covers', CoverController::class);
 
 Route::get('/products/status/{product}', [ProductController::class, 'changeStatus'])->name('products.status');
 Route::get('/products/{product}/variants/{variant}', [ProductController::class, 'variants'])

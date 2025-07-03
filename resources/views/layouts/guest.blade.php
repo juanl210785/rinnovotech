@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link href="{{ asset('build/assets/images/logo.svg') }}" rel="shortcut icon">
+    <link href="{{ asset('img/tienda.png') }}" rel="shortcut icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -16,7 +16,6 @@
 
     <!-- Scripts -->
     @vite('resources/css/app.css')
-    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
     {{-- Styles --}}
     @livewireStyles
@@ -35,13 +34,14 @@
                     </span>
                 </a>
                 <div class="my-auto">
-                    
+
                     <img alt="Icewall Tailwind HTML Admin Template" class="-intro-x w-1/2 -mt-16"
                         src="{{ asset('img/tienda.png') }}">
                     <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">
                         {{ __('The most reliable e-commerce') }}</div>
                     <div class="-intro-x mt-5 text-lg text-white text-opacity-70">Administra todas tus cuentas de
-                        comercio electrónico <br> en un solo lugar dark = {{$dark_mode}} color = {{$color_scheme}}</div>
+                        comercio electrónico <br> en un solo lugar dark = {{ $dark_mode }} color =
+                        {{ $color_scheme }}</div>
                 </div>
             </div>
             <!-- END: Login Info -->

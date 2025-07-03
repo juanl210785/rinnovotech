@@ -42,6 +42,12 @@
             'active' => request()->routeIs('admin.products.*'),
             'route' => 'admin.products.index',
         ],
+        [
+            'name' => __('Covers'),
+            'icon' => 'shield',
+            'active' => request()->routeIs('admin.covers.*'),
+            'route' => 'admin.covers.index',
+        ],
     ];
 @endphp
 <nav class="side-nav">
