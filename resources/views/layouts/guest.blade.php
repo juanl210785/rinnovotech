@@ -72,6 +72,8 @@
     {{-- Scripts --}}
     @livewireScripts
 
+    @stack('java')
+
 </body>
 
 </html>

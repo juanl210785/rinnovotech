@@ -16,4 +16,10 @@
             {!! __('results') !!}
         </p>
     </div>
+@else
+    <div class="hidden md:block mx-auto text-slate-500">
+        <p>
+            {{ __('No hay resultados') }}
+        </p>
+    </div>
 @endif

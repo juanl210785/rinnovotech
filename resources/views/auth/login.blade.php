@@ -8,6 +8,9 @@
             <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">{{ __('Sign In') }}</h2>
             <div class="intro-x mt-2 text-slate-400 xl:hidden text-center">{{ __('The most reliable e-commerce') }}</div>
             <div class="intro-x mt-8">
+
+
+
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
@@ -50,5 +53,23 @@
         </div>
     </div>
 
+    @push('java')
+        <script>
+            // Success notification
+            $("#success-notification-toggle").on("click", function() {
+                Toastify({
+                    node: $("#success-notification-content")
+                        .clone()
+                        .removeClass("hidden")[0],
+                    duration: -1,
+                    newWindow: true,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    stopOnFocus: true,
+                }).showToast();
+            });
+        </script>
+    @endpush
 
 </x-guest-layout>
