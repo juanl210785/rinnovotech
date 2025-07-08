@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\DarkModeController;
 use App\Http\Controllers\ColorSchemeController;
+use App\Http\Controllers\WelcomeController;
 use App\Models\Product;
 use App\Models\Variant;
 
@@ -25,9 +26,7 @@ Route::get('dark-mode-switcher', [DarkModeController::class, 'switch'])->name('d
 Route::get('color-scheme-switcher/{color_scheme}', [ColorSchemeController::class, 'switch'])->name('color-scheme-switcher');
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
 
 /* Route::get('/dashboard', function () {
     return view('admin.dashboard');

@@ -56,20 +56,27 @@
                 @endif
             </ul>
         </nav>
-        <form method="GET" action="{{ route('admin.products.index') }}">
+        {{-- <form method="GET" action="{{ route('admin.covers.index') }}">
             <select class="w-20 form-select box mt-3 sm:mt-0" name="pag" onchange="this.form.submit()">
                 <option value="10">10</option>
                 <option value="25">25</option>
                 <option value="35">35</option>
                 <option value="50">50</option>
             </select>
+        </form> --}}
+        <form method="GET" action="{{ url()->current() }}">
+
+            @foreach (request()->except('pag') as $key => $value)
+                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+            @endforeach
+
+            <select class="w-20 form-select box mt-3 sm:mt-0" name="pag" onchange="this.form.submit()">
+                <option value="10" {{ request('pag') == 10 ? 'selected' : '' }}>10</option>
+                <option value="25" {{ request('pag') == 25 ? 'selected' : '' }}>25</option>
+                <option value="35" {{ request('pag') == 35 ? 'selected' : '' }}>35</option>
+                <option value="50" {{ request('pag') == 50 ? 'selected' : '' }}>50</option>
+            </select>
         </form>
-        {{-- <select class="w-20 form-select box mt-3 sm:mt-0" name="pag">
-                    <option value="10">10</option>
-                    <option value="10">25</option>
-                    <option value="10">35</option>
-                    <option value="10">50</option>
-                </select> --}}
     </div>
 @endif
 

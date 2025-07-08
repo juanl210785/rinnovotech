@@ -25,6 +25,7 @@ Route::resource('subcategories', SubcategoryController::class);
 Route::resource('products', ProductController::class);
 Route::resource('covers', CoverController::class);
 
+Route::get('/covers/status/{cover}', [CoverController::class, 'changeStatus'])->name('covers.status');
 Route::get('/products/status/{product}', [ProductController::class, 'changeStatus'])->name('products.status');
 Route::get('/products/{product}/variants/{variant}', [ProductController::class, 'variants'])
     ->scopeBindings()

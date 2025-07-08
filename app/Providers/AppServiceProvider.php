@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Cover;
+use App\Observers\CoverObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

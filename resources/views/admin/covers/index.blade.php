@@ -23,7 +23,7 @@
         </h2>
     </div>
 
-    <div class="grid grid-cols-12 gap-6 mt-5">
+    <div class="grid grid-cols-12 gap-6 mt-5 mb-8">
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
 
             {{-- start boton crear --}}
@@ -75,77 +75,65 @@
         </div>
 
         <!-- BEGIN: Data List -->
-        {{-- Debo crear un componente livewire --}}
-        @if ($covers->count())
-            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
-                <x-table-jl>
-                    <x-slot name="thead">
-                        <th class="whitespace-nowrap">{{ __('Image') }}</th>
-                        <th class="whitespace-nowrap">{{ __('Title') }}</th>
-                        <th class="text-center whitespace-nowrap">{{ __('Start at') }}</th>
-                        <th class="text-center whitespace-nowrap">{{ __('End at') }}</th>
-                        <th class="text-center whitespace-nowrap">{{ __('Status') }}</th>
-                        <th class="text-center whitespace-nowrap">{{ __('Actions') }}</th>
-                    </x-slot>
 
-                    <x-slot name="tbody">
-                        @foreach ($covers as $cover)
-                            <tr class="intro-x">
-                                <td class="w-40">
-                                    <div class="flex">
-                                        <div class="w-10 h-10 image-fit zoom-in">
-                                            <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                                src="{{ Storage::url($cover->image_path) }}"
-                                                title="{{ $cover->title }}">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <a href="{{ route('admin.covers.edit', $cover) }}"
-                                        class="font-medium whitespace-nowrap">{{ $cover->title }}</a>
-                                </td>
-                                <td class="text-center">{{ $cover->start_at->diffForHumans() }}</td>
-                                <td class="text-center">{{ $cover->end_at->diffForHumans() }}</td>
-                                <td class="w-40">
-                                    <div
-                                        class="flex items-center justify-center {{ $cover->is_active ? 'text-success' : 'text-danger' }} ">
-                                        <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> <a href="">
-                                            {{ $cover->is_active ? 'Activo' : 'Inactivo' }}
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="table-report__action w-56">
-                                    <div class="flex justify-center items-center">
-                                        <a class="flex items-center mr-3"
-                                            href="{{ route('admin.covers.edit', $cover) }}">
-                                            <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> {{ __('Edit') }}
-                                        </a>
-
-                                        <a href="javascript:;" data-tw-toggle="modal"
-                                            data-tw-target="#delete-modal-preview"
-                                            class="flex items-center text-danger">
-                                            <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> {{ __('Delete') }}
-                                        </a>
-
-                                        <form action="{{ route('admin.covers.destroy', $cover) }}" method="post"
-                                            id="form-delete">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </x-slot>
-                </x-table-jl>
-            </div>
-        @else
-        @endif
-        <!-- END: Data List -->
-
-        <!-- BEGIN: Pagination -->
-        {{ $covers->links() }}
-        <!-- END: Pagination -->
     </div>
+
+    @if ($covers->count())
+        <ul class="intro-y" id="covers">
+            @foreach ($covers as $cover)
+                <li data-id="{{ $cover->id }}" class="box px-2 py-2 mb-3 flex items-center zoom-in cursor-move">
+                    <div class="w-20 md:w-40 h-20 flex-none image-fit rounded-md overflow-hidden">
+                        <img alt="Midone - HTML Admin Template" src="{{ $cover->image }}">
+                    </div>
+                    <div class="ml-4 mr-auto">
+                        <div class="font-medium">{{ $cover->title }}</div>
+                        <div class="text-slate-500 text-xs mt-0.5">
+                            {{ __('Start at') . ' ' . $cover->start_at->diffForHumans() }}</div>
+                        <div
+                            class="flex items-center cursor-pointer mt-2 {{ $cover->is_active ? 'text-success' : 'text-danger' }} ">
+                            <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> <a
+                                href="{{ route('admin.covers.status', $cover) }}">
+                                {{ $cover->is_active ? 'Activo' : 'Inactivo' }}
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="flex-col justify-center">
+                        <div class="py-1 px-2 rounded-full text-xs bg-success text-white font-medium">
+                            {{ $cover->end_at ? __('End at') . ' ' . $cover->end_at->diffForHumans() : __('End at') . ' Indefinido' }}
+                        </div>
+                        <a href="{{ route('admin.covers.edit', $cover) }}"
+                            class="btn btn-sm btn-secondary w-24 mt-2">{{ __('Edit') }}</a>
+                    </div>
+                </li>
+            @endforeach
+        </ul>
+        <!-- END: Blog Layout -->
+        <!-- BEGIN: Pagination -->
+        {{ $covers->appends(request()->all())->links('vendor.pagination.tailwind') }}
+        <!-- END: Pagination -->
+    @else
+    @endif
+
+
+    @push('js')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.6/Sortable.min.js"></script>
+        <script>
+            new Sortable(covers, {
+                animation: 150,
+                ghostClass: 'bg-emerald-400',
+                store: {
+                    set: (sortable) => {
+                        const sorts = sortable.toArray();
+                        axios.post("{{ route('api.sort.covers') }}", {
+                            sorts: sorts
+                        }).catch((error) => {
+                            console.log(error);
+                        })
+                    }
+                }
+            });
+        </script>
+    @endpush
 
 </x-app-layout>
