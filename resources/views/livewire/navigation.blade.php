@@ -1,5 +1,5 @@
 <div x-data="{ open: false }">
-    <header class="bg-emerald dark:bg-transparent intro-y">
+    <header class="bg-emerald-700 dark:bg-slate-900 intro-y">
         <x-container class="px-4 py-4">
             <div class="flex justify-between space-x-8 items-center">
                 <button class="text-2xl md:text-3xl text-white" x-on:click="open = true">
@@ -62,7 +62,7 @@
 
     <div x-show="open" style="display: none" class="fixed top-0 left-0 z-[100]">
         <div class="flex ">
-            <div class="w-screen md:w-80 h-screen bg-secondary dark:bg-transparent">
+            <div class="w-screen md:w-80 h-screen bg-secondary dark:bg-slate-900">
                 <div class="px-4 py-6 bg-emerald-900 text-white dark:bg-slate-800">
                     <div class="flex justify-between items-center">
                         <span class="text-lg font-semibold">
@@ -77,7 +77,7 @@
                     <ul>
                         @foreach ($families as $family)
                             <li wire:mouseover="$set('family_id', {{ $family->id }})" class="intro-y">
-                                <a href="javascript:;" class="side-menu">
+                                <a href="{{ route('families.show', $family) }}" class="side-menu">
 
                                     <div
                                         class="side-menu__title flex items-center justify-between px-4 py-4 hover:bg-emerald-600 dark:hover:bg-slate-600">
@@ -93,11 +93,12 @@
                 </div>
             </div>
             <div class="w-80 xl:w-[57rem] pt-[52px] hidden md:block">
-                <div class="bg-secondary dark:bg-transparent h-[calc(100vh-52px)] overflow-auto px-6 py-8">
+                <div class="bg-secondary dark:bg-slate-900 h-[calc(100vh-52px)] overflow-auto px-6 py-8">
 
                     <div class="mb-8 flex justify-between items-center">
                         <p class="text-lg font-medium mr-auto uppercase">{{ $this->familyName }}</p>
-                        <button class="btn btn-sm btn-primary w-24 mr-1 mb-2">{{ __('See all') }}</button>
+                        <a href="{{ route('families.show', $family_id) }}"
+                            class="block btn btn-sm btn-primary w-24 mr-1 mb-2">{{ __('See all') }}</a>
                     </div>
 
                     <ul class="grid grid-cols-1 xl:grid-cols-3 gap-8 intro-y">

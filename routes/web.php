@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\DarkModeController;
 use App\Http\Controllers\ColorSchemeController;
+use App\Http\Controllers\FamilyController as ControllersFamilyController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\Product;
 use App\Models\Variant;
@@ -27,11 +28,7 @@ Route::get('color-scheme-switcher/{color_scheme}', [ColorSchemeController::class
 
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
-
-/* Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard'); */
-
+Route::get('/families/{family}', [ControllersFamilyController::class, 'show'])->name('families.show');
 
 Route::get('prueba', function () {
     /* $array1 = ['a', 'b', 'c'];
