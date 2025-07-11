@@ -18,9 +18,9 @@
                     <path d="m9 18 6-6-6-6"></path>
                 </svg>
             </li>
-            {{-- <li class="inline-flex items-center">
-                <a class="flex items-center text-sm text-gray-500 hover:text-blue-600 focus:outline-hidden focus:text-blue-600"
-                    href="#">
+            <li class="inline-flex items-center">
+                <a class="flex items-center text-sm text-white hover:text-emerald-600 focus:outline-hidden focus:text-emerald-600"
+                    href="{{ route('families.show', $category->family) }}">
                     <svg class="shrink-0 me-3 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -29,18 +29,18 @@
                             d="M10 21V8a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H3">
                         </path>
                     </svg>
-                    App Center
+                    {{ $category->family->name }}
                     <svg class="shrink-0 mx-2 size-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24"
                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
                         <path d="m9 18 6-6-6-6"></path>
                     </svg>
                 </a>
-            </li> --}}
+            </li>
             <li class="inline-flex items-center text-sm font-semibold text-gray-200 truncate" aria-current="page">
-                {{ $family->name }}
+                {{ $category->name }}
             </li>
         </ol>
     </x-container>
-    @livewire('filter', ['family_id' => $family->id])
+    @livewire('filter', ['category_id' => $category->id])
 </x-client-layout>

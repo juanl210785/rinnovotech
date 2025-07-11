@@ -52,31 +52,11 @@
                                 <div class="flex items-center">
                                     <i data-lucide="dollar-sign" class="w-4 h-4 mr-2"></i> {{ __('Price') }}:
                                     ${{ $product->price }}
-                                </div>
-                                {{-- <div class="flex items-center mt-2">
-                                    <i data-lucide="layers" class="w-4 h-4 mr-2"></i> Remaining Stock:
-
-                                </div> --}}
-                                {{-- <div class="flex items-center mt-2">
-                                <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Status:
-                                {{ $faker['true_false'][0] ? 'Active' : 'Inactive' }}
-                            </div> --}}
+                                </div>                                
                             </div>
                         </div>
                         <div class="flex justify-center lg:justify-end items-center p-5 border-t border-slate-200/60">
                             <a href="" class="btn btn-rounded-primary w-full">{{ __('See more') }}</a>
-
-
-                            {{-- <a class="flex items-center text-primary mr-auto" href="javascript:;">
-                            <i data-lucide="eye" class="w-4 h-4 mr-1"></i> Preview
-                        </a>
-                        <a class="flex items-center mr-3" href="javascript:;">
-                            <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit
-                        </a>
-                        <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal"
-                            data-tw-target="#delete-confirmation-modal">
-                            <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete
-                        </a> --}}
                         </div>
                     </div>
                 </div>

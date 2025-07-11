@@ -3,28 +3,47 @@
 namespace App\Http\Livewire;
 
 use App\Models\Option;
+use App\Models\Product;
+use Illuminate\Http\Request;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Filter extends Component
 {
-    public $family_id;
+    use WithPagination;
 
-    public $options;
+    public $family_id, $category_id, $subcategory_id;
+
+    public $options, $selected_features = [], $orderBy = 1, $search;
+
+    protected $listeners = ['search' => 'filtrarProductos'];
 
     public function mount()
     {
-        $this->options = Option::whereHas('products.subcategory.category', function ($query) {
-            $query->where('family_id', $this->family_id);
-        })->with([
-            'features' => function ($query) {
-                $query->whereHas('variants.product.subcategory.category', function ($query) {
-                    $query->where('family_id',  $this->family_id);
-                });
-            }
-        ])->get();
+        $this->options = Option::verifyFamily($this->family_id)
+            ->verifyCategory($this->category_id)
+            ->verifySubcategory($this->subcategory_id)
+            ->get()
+            ->toArray();
     }
-    public function render()
+
+    public function filtrarProductos($data)
     {
-        return view('livewire.filter');
+        $this->search = $data;
+    }
+
+    public function render(Request $request)
+    {
+        $pag = $request->get('pag', 10);
+
+        $products = Product::verifyFamily($this->family_id)
+            ->verifyCategory($this->category_id)
+            ->verifySubcategory($this->subcategory_id)
+            ->customOrder($this->orderBy)
+            ->selectedFeatures($this->selected_features)
+            ->customSearch($this->search)
+            ->paginate($pag);
+
+        return view('livewire.filter', compact('products'));
     }
 }

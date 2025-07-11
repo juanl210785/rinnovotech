@@ -1,10 +1,14 @@
 <div x-data="{ open: false }">
+    {{-- Cabecera --}}
     <header class="bg-emerald-700 dark:bg-slate-900 intro-y">
         <x-container class="px-4 py-4">
             <div class="flex justify-between space-x-8 items-center">
+                {{-- Boton menu --}}
                 <button class="text-2xl md:text-3xl text-white" x-on:click="open = true">
                     <i data-lucide="menu"></i>
                 </button>
+
+                {{-- Logo --}}
                 <h1 class="text-white">
                     <a href="/" class="flex justify-between items-center">
                         <img alt="Midone - HTML Admin Template" class="w-8 mr-4" src="{{ asset('img/tienda.png') }}">
@@ -16,10 +20,13 @@
                     </a>
                 </h1>
 
+                {{-- Input busqueda --}}
                 <div class="flex-1 hidden md:block">
-                    <input type="text" class="form-control w-full" placeholder="Buscar por producto">
+                    <input type="text" oninput="search(this.value)" class="form-control w-full"
+                        placeholder="Buscar por producto">
                 </div>
 
+                {{-- Desplegable del usuario --}}
                 <div class="flex items-center space-x-4 md:space-x-8">
                     <x-dropdown-jl>
                         <x-slot name="boton">
@@ -50,16 +57,19 @@
                 </div>
             </div>
 
+            {{-- Input busqueda movil --}}
             <div class="mt-2 md:hidden">
-                <input type="text" class="form-control text-xs" placeholder="Buscar por producto">
+                <input type="text" oninput="search(this.value)" class="form-control text-xs"
+                    placeholder="Buscar por producto">
             </div>
         </x-container>
     </header>
 
-
+    {{-- Cubridor --}}
     <div x-show="open" style="display: none" x-on:click="open = false"
         class="fixed top-0 left-0 inset-0 bg-emerald bg-opacity-50 z-[80]"></div>
 
+    {{-- Barra lateral --}}
     <div x-show="open" style="display: none" class="fixed top-0 left-0 z-[100]">
         <div class="flex ">
             <div class="w-screen md:w-80 h-screen bg-secondary dark:bg-slate-900">
@@ -74,6 +84,7 @@
                     </div>
                 </div>
                 <div class="h-[calc(100vh-52px)] overflow-auto">
+                    {{-- Familias --}}
                     <ul>
                         @foreach ($families as $family)
                             <li wire:mouseover="$set('family_id', {{ $family->id }})" class="intro-y">
@@ -101,10 +112,11 @@
                             class="block btn btn-sm btn-primary w-24 mr-1 mb-2">{{ __('See all') }}</a>
                     </div>
 
+                    {{-- Categorias --}}
                     <ul class="grid grid-cols-1 xl:grid-cols-3 gap-8 intro-y">
                         @foreach ($this->categories as $category)
                             <li>
-                                <a href="">
+                                <a href="{{ route('categories.show', $category) }}">
                                     <div class="report-box zoom-in">
                                         <div class="box p-5 bg-emerald-800 text-slate-50">
                                             <div class="flex items-center">
@@ -115,11 +127,11 @@
                                     </div>
 
                                 </a>
-
+                                {{-- Subcategorias --}}
                                 <ul class="mt-5 space-y-2">
                                     @foreach ($category->subcategories as $subcategory)
                                         <li>
-                                            <a href="">
+                                            <a href="{{ route('subcategories.show', $subcategory) }}">
                                                 <div class="box px-2 py-2 mb-2 flex items-center zoom-in">
                                                     <i data-lucide="list" class="w-4 h-4 mr-2"></i>
                                                     {{ $subcategory->name }}
@@ -135,4 +147,17 @@
             </div>
         </div>
     </div>
+
+    @push('js')
+        <script>
+            let debounceTimer;
+
+            function search(value) {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    Livewire.emit('search', value);
+                }, 300); // Espera 300ms antes de emitir
+            }
+        </script>
+    @endpush
 </div>
