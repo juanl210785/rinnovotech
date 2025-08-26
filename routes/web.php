@@ -9,6 +9,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\DarkModeController;
 use App\Http\Controllers\ColorSchemeController;
 use App\Http\Controllers\FamilyController as ControllersFamilyController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\Product;
@@ -33,6 +34,7 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
 Route::get('/families/{family}', [ControllersFamilyController::class, 'show'])->name('families.show');
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 Route::get('/subcategories/{subcategory}', [SubCategoryController::class, 'show'])->name('subcategories.show');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('prueba', function () {
     /* $array1 = ['a', 'b', 'c'];

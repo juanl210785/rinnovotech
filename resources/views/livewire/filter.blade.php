@@ -80,7 +80,7 @@
                                 </div>
                                 <div
                                     class="flex justify-center lg:justify-end items-center p-5 border-t border-slate-200/60">
-                                    <a href="" class="btn btn-rounded-primary w-full">{{ __('See more') }}</a>
+                                    <a href="{{route('products.show', $product)}}" class="btn btn-rounded-primary w-full">{{ __('See more') }}</a>
                                 </div>
                             </div>
                         </div>
