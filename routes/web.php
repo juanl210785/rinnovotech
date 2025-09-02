@@ -14,6 +14,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\Product;
 use App\Models\Variant;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,11 @@ Route::get('prueba', function () {
     }
 
     return 'Variantes creadas';
+});
+
+Route::get('cart', function () {
+    Cart::instance('shopping');
+    return Cart::content(); 
 });
 
 function generarCombinaciones($arrays, $indice = 0, $combinacion = [])
