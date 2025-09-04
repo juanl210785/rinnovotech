@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Products;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
@@ -25,10 +25,16 @@ class AddToCart extends Component
                 'features' => []                
             ]
         ]);
+
+        if (auth()->check()) {
+            Cart::store(auth()->id());
+        }
+
+        $this->emit('cartUpdated', Cart::count());
     }
 
     public function render()
     {
-        return view('livewire.add-to-cart');
+        return view('livewire.products.add-to-cart');
     }
 }

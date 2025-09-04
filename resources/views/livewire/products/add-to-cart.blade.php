@@ -15,12 +15,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="mt-8 intro-y box p-4 shadow-lg text-gray-700">
-                    <h2 class="font-bold text-lg">{{ __('Description') }}</h2>
-                    {!! $product->description !!}
-                </div>
+                </div>                
 
                 {{-- <div class="mt-4 text-gray-700">
                     <h2 class="font-bold text-lg">{{ __('Leave review') }}</h2>
@@ -105,7 +100,7 @@
             </div>
 
             <div>
-                <div class="intro-y box p-4 mt-5 mb-4">
+                <div class="intro-y box p-4 mt-5 mb-2">
                     <h1 class=" text-xl font-bold text-trueGray-700">{{ $product->name }}</h1>
                     {{-- <div class="flex">
                         <p class="text-trueGray-700">{{ __('Brand') }}: <a
@@ -118,7 +113,7 @@
                     </div> --}}
                     <p class="text-2xl font-semibold text-trueGray-700 my-4">USD {{ $product->price }}</p>
                 </div>
-                <div class="intro-y box rounded-lg shadow-lg mb-6">
+                <div class="intro-y box rounded-lg shadow-lg mb-2">
                     <div class=" p-4 flex items-center">
                         <span class="flex items-center justify-center h-10 w-10 rounded-full bg-green-700">
                             <i class="fas fa-truck text-sm text-white"></i>
@@ -161,6 +156,11 @@
                             </button>
                         </div>
                     </div>
+                </div>
+
+                <div class="mt-2 intro-y box p-4 shadow-lg text-gray-700">
+                    <h2 class="font-bold text-lg">{{ __('Description') }}</h2>
+                    {!! $product->description !!}
                 </div>
                 {{-- @if ($product->subcategory->size)
                     @livewire('add-cart-item-size', ['product' => $product])

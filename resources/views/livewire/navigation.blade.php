@@ -41,6 +41,15 @@
                                 <x-dropdown-link-jl href="{{ route('admin.dashboard') }}" class="dropdown-item">
                                     <i data-lucide="home" class="w-4 h-4 mr-2"></i> {{ __('Dashboard') }}
                                 </x-dropdown-link-jl>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+
+                                    <x-dropdown-link-jl href="{{ route('logout') }}" class="dropdown-item"
+                                        onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+                                        <i data-lucide="log-out" class="w-4 h-4 mr-2"></i>{{ __('Log Out') }}
+                                    </x-dropdown-link-jl>
+                                </form>
                             @else
                                 <x-dropdown-link-jl href="{{ route('login') }}" class="dropdown-item">
                                     <i data-lucide="log-in" class="w-4 h-4 mr-2"></i> {{ __('Login') }}
@@ -52,7 +61,15 @@
 
                         </x-slot>
                     </x-dropdown-jl>
-                    <a href="" class="text-xl md:text-3xl text-white"><i data-lucide="shopping-cart"></i></a>
+                    <a href="#" class="relative">
+                        <i data-lucide="shopping-cart" class="text-xl md:text-3xl text-white"></i>
+                        @if (Cart::instance('shopping')->count())
+                            <span id="cart-count"
+                                class="text-xs font-bold text-white absolute -top-2 -end-4 inline-flex w-5 h-5 items-center justify-center bg-red-500 rounded-full">
+                                {{ Cart::instance('shopping')->count() }}
+                            </span>
+                        @endif
+                    </a>
 
                 </div>
             </div>
@@ -151,6 +168,10 @@
     @push('js')
         <script>
             let debounceTimer;
+
+            Livewire.on('cartUpdated', (count) => {
+                document.getElementById('cart-count').innerText = count;
+            })
 
             function search(value) {
                 clearTimeout(debounceTimer);
