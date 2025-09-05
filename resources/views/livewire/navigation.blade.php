@@ -61,14 +61,17 @@
 
                         </x-slot>
                     </x-dropdown-jl>
-                    <a href="#" class="relative">
+                    @php
+                        $conteo = Cart::instance('shopping')->count()
+                    @endphp
+                    <a href="{{ route('cart.index') }}" class="relative">
                         <i data-lucide="shopping-cart" class="text-xl md:text-3xl text-white"></i>
-                        @if (Cart::instance('shopping')->count())
-                            <span id="cart-count"
-                                class="text-xs font-bold text-white absolute -top-2 -end-4 inline-flex w-5 h-5 items-center justify-center bg-red-500 rounded-full">
-                                {{ Cart::instance('shopping')->count() }}
-                            </span>
-                        @endif
+                        <span id="cart-count"
+                            class="text-xs font-bold text-white absolute -top-2 -end-4 inline-flex w-5 h-5 items-center justify-center bg-red-500 rounded-full">
+                            @if ($conteo)
+                                {{$conteo}}                                
+                            @endif                            
+                        </span>
                     </a>
 
                 </div>

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\FamilyController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\DarkModeController;
@@ -36,6 +37,7 @@ Route::get('/families/{family}', [ControllersFamilyController::class, 'show'])->
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 Route::get('/subcategories/{subcategory}', [SubCategoryController::class, 'show'])->name('subcategories.show');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
 Route::get('prueba', function () {
     /* $array1 = ['a', 'b', 'c'];
@@ -67,7 +69,7 @@ Route::get('prueba', function () {
     return 'Variantes creadas';
 });
 
-Route::get('cart', function () {
+Route::get('cart_test', function () {
     Cart::instance('shopping');
     return Cart::content(); 
 });
