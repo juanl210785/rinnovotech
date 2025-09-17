@@ -24,8 +24,9 @@
 
 <body class="login">
     <div class="container sm:px-10">
-        <div class="block xl:grid grid-cols-2 gap-4">
+        <div class="block xl:grid grid-cols-2 gap-2">
             <!-- BEGIN: Login Info -->
+            
             <div class="hidden xl:flex flex-col min-h-screen">
                 <a href="" class="-intro-x flex items-center pt-5">
                     <img alt="Icewall Tailwind HTML Admin Template" class="w-6" src="{{ asset('img/tienda.png') }}">
