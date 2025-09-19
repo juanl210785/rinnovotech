@@ -29,19 +29,20 @@
                     {{-- document --}}
                     <div class="intro-x input-group mt-2">
                         <div id="phone" class="input-group">
-
                             <select class="form-select form-select-lg w-40"
                                 name="document_type"
-                                aria-label="Default select example">
+                                aria-label="Default select example" required>
+                                <option  value="">{{__('Documento')}}</option>
                                 @foreach (\App\Enums\TypeOfDocuments::cases() as $item)
-                                    <option value="{{$item->value}}">{{$item->name}}</option>
+                                    <option value="{{old('document_type', $item->value)}}">{{$item->name}}</option>
                                 @endforeach
-                            </select>
-
-                        </div>
+                            </select>                            
+                        </div>                       
                         <input type="text" name="document_number" :value="old('document_number')" class="form-control"
-                            placeholder="{{ __('Cedula/RIF') }}" aria-label="document_number" aria-describedby="document_number">
+                            placeholder="{{ __('Cedula/RIF') }}" aria-label="document_number" aria-describedby="document_number" required>                        
                     </div>
+                    <x-input-error :messages="$errors->get('document_type')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('document_number')" class="mt-2" />
 
                     {{-- Phone --}}
                     <div class="intro-x input-group mt-2">
@@ -49,16 +50,20 @@
 
                             <select class="form-select form-select-lg w-40"
                                 name="phone_type"
-                                aria-label="Default select example">
+                                aria-label="Default select example" required>
+                                    <option value="">{{__('Operadora')}}</option>
                                 @foreach (\App\Enums\TypeOfPhone::cases() as $item)
-                                    <option value="{{$item->value}}">{{$item->name}}</option>
+                                    <option value="{{old('phone_type', $item->value)}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
-
+                            
                         </div>
                         <input type="text" name="phone_number" :value="old('phone_number')" class="form-control"
-                            placeholder="{{ __('Phone') }}" aria-label="phone_number" aria-describedby="phone_number">
+                            placeholder="{{ __('Phone') }}" aria-label="phone_number" aria-describedby="phone_number" required>
+                        
                     </div>
+                    <x-input-error :messages="$errors->get('phone_type')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
 
                     <!-- Password -->
                     <input id="password" type="password" class="intro-x login__input form-control py-3 px-4 block mt-2"
