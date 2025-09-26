@@ -1,6 +1,6 @@
 <div>
     <div class="grid grid-cols-1 lg:grid-cols-7 gap-6">
-        <div class="lg:col-span-5">
+        <div class="lg:col-span-5 intro-y">
             <div class="flex justify-between mb-2">
                 <h1 class="text-white text-lg">
                     {{ __('Shopping cart') }} ({{ Cart::count() }}) {{ __('products') }}
@@ -64,7 +64,7 @@
                 </ul>
             </div>
         </div>
-        <div class="lg:col-span-2">
+        <div class="lg:col-span-2 intro-y">
             <div class="box p-4">
                 <div class="flex justify-between font-semibold">
                     <p>
@@ -76,7 +76,7 @@
                 </div>
 
                 @if (Cart::count())
-                    <a href="#" class="btn btn-primary block w-ful text-center">
+                    <a href="{{route('shipping.index')}}" class="btn btn-primary block w-ful text-center">
                         {{ __('Continue') }}
                     </a>
                 @else

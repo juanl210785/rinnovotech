@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\TypeOfDocuments;
+use App\Enums\TypeOfPhone;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -11,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rules\Enum;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
@@ -34,9 +37,9 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],            
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'document_type' => ['required'],
+            'document_type' => ['required', 'integer', new Enum(TypeOfDocuments::class)],
             'document_number' => ['required', 'integer', 'regex:/^\d{6,8}$/'],
-            'phone_type' => ['required'],
+            'phone_type' => ['required', 'integer', new Enum(TypeOfPhone::class)],
             'phone_number' => ['required', 'integer', 'regex:/^\d{7}$/'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ],[
