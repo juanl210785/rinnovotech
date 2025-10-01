@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('type');
             $table->string('description');
             $table->string('estado');
+            $table->string('reference');
             $table->integer('receiver');
             $table->json('receiver_info')->nullable();
             $table->boolean('default')->default(false);

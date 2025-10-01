@@ -14,6 +14,7 @@ class Address extends Model
         'type',
         'description',
         'estado',
+        'reference', 
         'receiver',
         'receiver_info',
         'default',

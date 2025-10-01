@@ -3,9 +3,9 @@
 namespace App\Enums;
 
 enum TypeOfPhone:int {
-    case _0416 = 1;
-    case _0414 = 2;
-    case _0412 = 3;
-    case _0426 = 4;
-    case _0424 = 5;
+    case O416 = 1;
+    case O414 = 2;
+    case O412 = 3;
+    case O426 = 4;
+    case O424 = 5;
 }
