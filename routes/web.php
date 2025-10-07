@@ -39,7 +39,7 @@ Route::get('/categories/{category}', [CategoryController::class, 'show'])->name(
 Route::get('/subcategories/{subcategory}', [SubCategoryController::class, 'show'])->name('subcategories.show');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::get('/shipping', [ShippingController::class, 'index'])->name('shipping.index');
+
 
 Route::get('prueba', function () {
     /* $array1 = ['a', 'b', 'c'];
@@ -96,6 +96,7 @@ function generarCombinaciones($arrays, $indice = 0, $combinacion = [])
 }
 
 Route::middleware('auth')->group(function () {
+    Route::get('/shipping', [ShippingController::class, 'index'])->name('shipping.index');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::controller(PageController::class)->group(function () {
         Route::get('/view', 'dashboardOverview1')->name('dashboard-overview-1');
