@@ -18,7 +18,7 @@
                                     aria-controls="faq-accordion-collapse-5">
                                     {{__('Credit card')}}                                     
                                 </button>
-                                <img class="w-40 h-8" src="https://codersfree.com/img/payments/credit-cards.png" alt="">
+                                <img class="w-40 h-8" src="{{asset('img/cerdit_card.png')}}" alt="">
                             </div>
                             <div id="faq-accordion-collapse-5" class="accordion-collapse collapse show"
                                 aria-labelledby="faq-accordion-content-5" data-tw-parent="#faq-accordion-2">
