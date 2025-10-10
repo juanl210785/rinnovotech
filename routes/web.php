@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\DarkModeController;
 use App\Http\Controllers\ColorSchemeController;
@@ -97,6 +98,7 @@ function generarCombinaciones($arrays, $indice = 0, $combinacion = [])
 
 Route::middleware('auth')->group(function () {
     Route::get('/shipping', [ShippingController::class, 'index'])->name('shipping.index');
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::controller(PageController::class)->group(function () {
         Route::get('/view', 'dashboardOverview1')->name('dashboard-overview-1');
