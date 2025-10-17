@@ -26,9 +26,10 @@ class CheckoutController extends Controller
         $password = config('services.niubiz.password');
         $auth = base64_encode($user . ":" . $password);
 
-        //$proxy = 'http://proxy.cantv.com.ve:80';
+        $proxy = 'http://proxy.cantv.com.ve:80';
 
         $response = Http::withOptions([
+            'proxy' => $proxy,
             'verify' => false // Desactiva verificación SSL si el proxy interfiere
         ])->withHeaders([
             'Authorization' => 'Basic ' . $auth,
@@ -49,9 +50,10 @@ class CheckoutController extends Controller
         $description = $mainAddress?->description;
         $estado = $mainAddress?->estado;
 
-        //$proxy = 'http://proxy.cantv.com.ve:80'; proxy' => $proxy,
+        $proxy = 'http://proxy.cantv.com.ve:80'; 
 
         $response = Http::withOptions([
+            'proxy' => $proxy,
             'verify' => false // Desactiva verificación SSL si el proxy interfiere
         ])->withHeaders([
             'Authorization' => $access_token,

@@ -179,7 +179,7 @@
     </div>
 
     @push('js')
-        <script type="text/javascript" src="{{config('services.niubiz.url_js')}}"></script>
+        <script type="text/javascript" src="{{asset('js/checkout.js')}}"></script>
 
         <script type="text/javascript">
             function openForm() {
